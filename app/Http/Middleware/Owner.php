@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminOnly
+class Owner
 {
     /**
      * Handle an incoming request.
@@ -20,12 +20,14 @@ class AdminOnly
         if(Auth::check())
             {
 
-                if( Auth::user()->role == 3)
+                if( Auth::user()->role == 2)
                 {
                     return $next($request);
                 }
 
             }
             return redirect('/auth/login');
+
+        
     }
 }

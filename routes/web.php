@@ -43,14 +43,15 @@ Route::get('/auth/forget/message', function() {
 Route::middleware('customer.only')->group(function(){
     Route::get('/reservation',[FrontendController::class, 'reservation']);
 Route::post('/reservation',[FrontendController::class, 'store_reservation']);
-});
-
-Route::post('/contact',[FrontendController::class, 'contact']);
-
 Route::get('/appointment',[FrontendController::class, 'appointment']);
 Route::get('/appointment/{id}',[FrontendController::class, 'update_appointment']);
 Route::get('/account',[FrontendController::class, 'account']);
 Route::post('/account/{id}',[FrontendController::class, 'update_account']);
+
+});
+
+Route::post('/contact',[FrontendController::class, 'contact']);
+
 
 Route::get('/services',[FrontendController::class, 'services']);
 Route::get('/view',[FrontendController::class, 'branch']);
@@ -83,7 +84,7 @@ Route::post('/auth/password/reset/{id}',[AuthController::class,'reset_password']
     });
 
     // Owner
-    Route::prefix('owner')->group(function (){
+    Route::middleware('owner.only')->prefix('owner')->group(function (){
 
         Route::get('dashboard',[OwnerController::class,'index']);
         Route::get('appointment',[OwnerController::class,'appointment']);
@@ -101,7 +102,7 @@ Route::post('/auth/password/reset/{id}',[AuthController::class,'reset_password']
     });
 
 
-     Route::prefix('employee')->group(function (){
+     Route::middleware('employee.only')->prefix('employee')->group(function (){
 
          Route::get('appointment',[EmployeeController::class,'appointment']);
          Route::get('/appointment/{id}/done',[EmployeeController::class,'update_appointment']);
