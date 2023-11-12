@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'firstname' => 'admin',
             'lastname' => 'admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'onlinebarbershopreservation@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('admin123'), // password
             'remember_token' => Str::random(10),
