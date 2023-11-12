@@ -58,9 +58,9 @@ Route::get('/view',[FrontendController::class, 'branch']);
 Route::post('/feedback',[FrontendController::class, 'feedback']);
 
 // auth
-Route::get('/auth/login',[AuthController::class,'index']);
+Route::get('/auth/login',[AuthController::class,'index'])->middleware('auth.only');
 Route::post('/auth/login',[AuthController::class,'userLogin']);
-Route::get('/auth/signup',[AuthController::class,'signup']);
+Route::get('/auth/signup',[AuthController::class,'signup'])->middleware('auth.only');
 Route::post('/auth/signup',[AuthController::class,'store_signup']);
 Route::get('/auth/verification/{id}',[AuthController::class,'verified']);
 Route::get('/auth/google',[AuthController::class,'signup_google']);
@@ -99,6 +99,8 @@ Route::post('/auth/password/reset/{id}',[AuthController::class,'reset_password']
         Route::post('/account/{id}',[OwnerController::class,'update_account']);
         Route::get('/appointment/{id}/approved',[OwnerController::class,'update_appointment']);
         Route::get('/appointment/{id}/cancel',[OwnerController::class,'cancel_appointment']);
+        Route::get('/post/delete/{id}',[OwnerController::class,'post_delete']);
+        Route::get('/account/delete/{id}',[OwnerController::class,'account_delete']);
     });
 
 

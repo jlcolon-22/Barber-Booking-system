@@ -60,7 +60,7 @@ class FrontendController extends Controller
         ]);
         $check = Reservation::where('date',$request->date)->where('branch_id',$request->branch_id)->get()->count();
         // Check if the given date meets the maximum bookings per day.
-        if($check == 0)
+        if($check == 10)
         {
             return response()->json('true',204);
         }

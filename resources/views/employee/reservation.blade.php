@@ -79,6 +79,7 @@
                             @forelse($appointments as $appointment)
                              <tr class=" border-b bg-gray-900 border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+
                                        {{$appointment->postInfo->name}}
                                     </th>
                                     <td class="px-6 py-4">

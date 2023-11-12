@@ -15,6 +15,21 @@ use Illuminate\Support\Facades\Hash;
 class OwnerController extends Controller
 {
 
+    public function post_delete(Post $id)
+    {
+       
+        Reservation::where('post_id',$id->id)->delete();
+ $id->delete();
+        return back()->with('success','true');
+    } 
+    public function account_delete(User $id)
+    {
+        $id->delete();
+
+        return back()->with('success','true');
+    }
+
+
     public function update_appointment(Reservation $id)
     {
         $id->update([
@@ -84,7 +99,11 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
     public function appointment()
     {
         $branch = Branch::where('owner_id',Auth::id())->first();
-
+        if(!$branch)
+        {
+            $appointments = [];
+           return view('owner.reservation',compact('appointments'))->with('error','true');
+        }
         $appointments = Reservation::with('postInfo','branchInfo')->where('branch_id',$branch->id)->latest()->paginate(6);
 
         return view('owner.reservation',compact('appointments'));

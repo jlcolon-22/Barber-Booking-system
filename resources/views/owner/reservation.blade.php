@@ -86,6 +86,9 @@
                         </thead>
                         <tbody>
                            
+                          @if(session()->has('error'))
+
+                          @else
                             @forelse($appointments as $appointment)
                              <tr class=" border-b bg-gray-900 border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
@@ -137,13 +140,18 @@
                             @endforelse
 
 
+                          @endif
+
 
                  
 
                         </tbody>
                     </table>
                     <div class="py-5 px-1">
-                        {{ $appointments->links('pagination::tailwind') }}
+                        @if(!session()->has('error'))
+                            {{  $appointments->links('pagination::tailwind') }
+                        @endif
+                        // {{-- {{ session()->has('error') ? ' ' :  $appointments->links('pagination::tailwind') }} --}}
                     </div>
                 </div>
 

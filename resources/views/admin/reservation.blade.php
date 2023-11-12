@@ -74,14 +74,14 @@
                             @forelse($appointments as $appointment)
                              <tr class=" border-b bg-gray-900 border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
-                                       {{$appointment->postInfo->name}}
+                                       {{$appointment?->postInfo?->name}}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <img src="{{ asset($appointment->postInfo->photo) }}" class="h-[4rem] w-[4rem]" loading="lazy"
+                                        <img src="{{ asset($appointment?->postInfo?->photo) }}" class="h-[4rem] w-[4rem]" loading="lazy"
                                             alt="">
                                     </td>
                                     <td class="px-6 py-4">
-                                       {{$appointment->postInfo->category}}
+                                       {{$appointment?->postInfo?->category}}
                                     </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                        {{\Carbon\Carbon::parse($appointment->date)->format('d-m-Y')}}
