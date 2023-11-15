@@ -35,7 +35,7 @@
             </nav>
 
             <main class="pt-10">
-              
+
 
               @if(session()->has('success') )
                 <div class="flex items-center p-4 mb-4 text-sm  rounded-lg bg-gray-800 text-green-400" role="alert">
@@ -44,11 +44,11 @@
   </svg>
   <span class="sr-only">Info</span>
   <div>
-    <span class="font-medium">Your status change was successful!</span> 
+    <span class="font-medium">Your status change was successful!</span>
   </div>
 </div>
 
-        
+
 
               @endif
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -85,7 +85,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+
                           @if(session()->has('error'))
 
                           @else
@@ -100,10 +100,10 @@
                                     </td>
                                     <td class="px-6 py-4">
                                        {{$appointment->postInfo->category}}
-                                    </td>                                  
+                                    </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                        {{\Carbon\Carbon::parse($appointment->date)->format('d-m-Y')}}
-                                    </td>                                 
+                                    </td>
                                        <td class="px-6 py-4">
                                        {{$appointment->time}}
                                     </td>
@@ -127,11 +127,11 @@
 
                                     <td class="px-6 py-4  ">
                                        @if($appointment->status != 2 && $appointment->status != 3 && $appointment->status != 1)
-                                         <a href="/owner/appointment/{{$appointment->id}}/approved" class="text-green-500 mr-2 font-bold">Approved</a>                                        
+                                         <a href="/owner/appointment/{{$appointment->id}}/approved" class="text-green-500 mr-2 font-bold">Approved</a>
                                             <a href="/owner/appointment/{{$appointment->id}}/cancel" class="text-red-500 font-bold">Cancel</a>
                                        @endif
-                                 
-                                       
+
+
                                     </td>
                                 </tr>
                             @empty
@@ -143,13 +143,13 @@
                           @endif
 
 
-                 
+
 
                         </tbody>
                     </table>
                     <div class="py-5 px-1">
                         @if(!session()->has('error'))
-                            {{  $appointments->links('pagination::tailwind') }
+                            {{  $appointments->links('pagination::tailwind') }}
                         @endif
                         // {{-- {{ session()->has('error') ? ' ' :  $appointments->links('pagination::tailwind') }} --}}
                     </div>

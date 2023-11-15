@@ -23788,24 +23788,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Reservation',
-  props: ['data', 'user'],
+  props: ["data", "user"],
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var date = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
-    var time = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
+    var date = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)("");
+    var time = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)("");
     var loading = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var information = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
     var data = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)({
-      number: '',
-      firstname: '',
-      lastname: '',
-      email: '',
-      time: '',
-      date: '',
-      post_id: '',
-      branch_id: ''
+      number: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      time: "",
+      date: "",
+      post_id: "",
+      branch_id: ""
     });
     var minTime = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)({
       hours: 0,
@@ -23828,10 +23828,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       data.firstname = newUser === null || newUser === void 0 ? void 0 : newUser.firstname;
       data.lastname = newUser === null || newUser === void 0 ? void 0 : newUser.lastname;
       data.email = newUser === null || newUser === void 0 ? void 0 : newUser.email;
-      minTime.hours = (_newData$branch2 = newData.branch) === null || _newData$branch2 === void 0 ? void 0 : _newData$branch2.start_time.split(':')[0];
-      minTime.minutes = (_newData$branch3 = newData.branch) === null || _newData$branch3 === void 0 ? void 0 : _newData$branch3.start_time.split(':')[1];
-      maxTime.hours = (_newData$branch4 = newData.branch) === null || _newData$branch4 === void 0 ? void 0 : _newData$branch4.end_time.split(':')[0];
-      maxTime.minutes = (_newData$branch5 = newData.branch) === null || _newData$branch5 === void 0 ? void 0 : _newData$branch5.end_time.split(':')[1];
+      minTime.hours = (_newData$branch2 = newData.branch) === null || _newData$branch2 === void 0 ? void 0 : _newData$branch2.start_time.split(":")[0];
+      minTime.minutes = (_newData$branch3 = newData.branch) === null || _newData$branch3 === void 0 ? void 0 : _newData$branch3.start_time.split(":")[1];
+      maxTime.hours = (_newData$branch4 = newData.branch) === null || _newData$branch4 === void 0 ? void 0 : _newData$branch4.end_time.split(":")[0];
+      maxTime.minutes = (_newData$branch5 = newData.branch) === null || _newData$branch5 === void 0 ? void 0 : _newData$branch5.end_time.split(":")[1];
     });
     var store = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -23842,27 +23842,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 0;
               loading.value = true;
               _context.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_3__["default"].post('/reservation', data);
+              return axios__WEBPACK_IMPORTED_MODULE_3__["default"].post("/reservation", data);
             case 4:
               res = _context.sent;
               if (res.status == 204) {
-                alert('All slots are already taken for the day you selected');
+                alert("All slots are already taken for the day you selected");
               }
               loading.value = false;
-              // window.location.href = '/booked';
-              _context.next = 14;
+              window.location.href = "/booked";
+              _context.next = 15;
               break;
-            case 9:
-              _context.prev = 9;
+            case 10:
+              _context.prev = 10;
               _context.t0 = _context["catch"](0);
               loading.value = false;
               console.log(_context.t0.response);
               error.value = _context.t0.response.data.errors;
-            case 14:
+            case 15:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[0, 10]]);
       }));
       return function store() {
         return _ref2.apply(this, arguments);
@@ -25616,7 +25616,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
     onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.store, ["prevent"]),
     "class": "grid grid-cols-1 lg:w-3/5 px-10 mx-auto py-10 bg-black bg-opacity-90"
-  }, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    @if(session()->has('success'))\n        <div class=\"p-4 mb-10 text-sm rounded-lg  bg-gray-800 text-green-400\" role=\"alert\">\n          <span class=\"font-medium\">Updated Successfully!</span> \n      </div>\n      @endif\n\n      @csrf "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" book information "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  }, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    @if(session()->has('success'))\n        <div class=\"p-4 mb-10 text-sm rounded-lg  bg-gray-800 text-green-400\" role=\"alert\">\n          <span class=\"font-medium\">Updated Successfully!</span>\n      </div>\n      @endif\n\n      @csrf "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" book information "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: (_$setup$information = $setup.information) === null || _$setup$information === void 0 ? void 0 : _$setup$information.photo,
     "class": "max-h-[10rem] min-w-[15rem] object-top object-cover rounded",
     loading: "lazy",
@@ -25681,7 +25681,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $setup.data.time = $event;
     })
-  }, null, 8 /* PROPS */, ["min-time", "max-time", "modelValue"]), _hoisted_34])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.loading ? 'Loading...' : 'Update'), 1 /* TEXT */)], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_1);
+  }, null, 8 /* PROPS */, ["min-time", "max-time", "modelValue"]), _hoisted_34])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.loading ? "Loading..." : "Update"), 1 /* TEXT */)], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_1);
 }
 
 /***/ }),
@@ -27815,7 +27815,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.dp__theme_light {\n    --dp-background-color: #fff;\n    --dp-text-color: #212121;\n    --dp-hover-color: #f3f3f3;\n    --dp-hover-text-color: #212121;\n    --dp-hover-icon-color: #959595;\n    --dp-primary-color: #1976d2;\n    --dp-primary-disabled-color: #6bacea;\n    --dp-primary-text-color: #f8f5f5;\n    --dp-secondary-color: #c0c4cc;\n    --dp-border-color: #ddd;\n    --dp-menu-border-color: #ddd;\n    --dp-border-color-hover: #aaaeb7;\n    --dp-disabled-color: #f6f6f6;\n    --dp-scroll-bar-background: #f3f3f3;\n    --dp-scroll-bar-color: #959595;\n    --dp-success-color: #76d275;\n    --dp-success-color-disabled: #a3d9b1;\n    --dp-icon-color: backre;\n    --dp-danger-color: #ff6f60;\n    --dp-marker-color: #ff6f60;\n    --dp-tooltip-color: #fafafa;\n    --dp-disabled-color-text: #8e8e8e;\n    --dp-highlight-color: rgb(25 118 210 / 10%);\n    --dp-range-between-dates-background-color: var(--dp-hover-color, #f3f3f3);\n    --dp-range-between-dates-text-color: var(--dp-hover-text-color, #212121);\n    --dp-range-between-border-color: var(--dp-hover-color, #f3f3f3);\n    z-index: 100;\n}\n.dp__input_reg{\n    background: transparent;\n    border: none;\n/*  border-bottom: 1px solid blue;*/\nborder-radius: 0px !important;\nz-index: 100;\ncolor: white;\n}\n.dp__instance_calendar{\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dp__theme_light {\n  --dp-background-color: #fff;\n  --dp-text-color: #212121;\n  --dp-hover-color: #f3f3f3;\n  --dp-hover-text-color: #212121;\n  --dp-hover-icon-color: #959595;\n  --dp-primary-color: #1976d2;\n  --dp-primary-disabled-color: #6bacea;\n  --dp-primary-text-color: #f8f5f5;\n  --dp-secondary-color: #c0c4cc;\n  --dp-border-color: #ddd;\n  --dp-menu-border-color: #ddd;\n  --dp-border-color-hover: #aaaeb7;\n  --dp-disabled-color: #f6f6f6;\n  --dp-scroll-bar-background: #f3f3f3;\n  --dp-scroll-bar-color: #959595;\n  --dp-success-color: #76d275;\n  --dp-success-color-disabled: #a3d9b1;\n  --dp-icon-color: backre;\n  --dp-danger-color: #ff6f60;\n  --dp-marker-color: #ff6f60;\n  --dp-tooltip-color: #fafafa;\n  --dp-disabled-color-text: #8e8e8e;\n  --dp-highlight-color: rgb(25 118 210 / 10%);\n  --dp-range-between-dates-background-color: var(--dp-hover-color, #f3f3f3);\n  --dp-range-between-dates-text-color: var(--dp-hover-text-color, #212121);\n  --dp-range-between-border-color: var(--dp-hover-color, #f3f3f3);\n  z-index: 100;\n}\n.dp__input_reg {\n  background: transparent;\n  border: none;\n  /*  border-bottom: 1px solid blue;*/\n  border-radius: 0px !important;\n  z-index: 100;\n  color: white;\n}\n.dp__instance_calendar {\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -6,25 +6,6 @@
  <x-frontend_header/>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     {{--  hero --}}
     <main class="bg-[url('/assets/bg3.jpeg')]  bg-cover bg-center min-h-[100svh] origin-bottom items-center z-50 ">
 
