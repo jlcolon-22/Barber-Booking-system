@@ -27,9 +27,18 @@
        </nav>
 
 
-      
+
        <main class="mt-10">
-           
+                <form action="" method="get" class="py-1">
+                    <select onchange="this.form.submit()" name="branch" id="" class="px-4 w-fit py-1 bg-gray-200 rounded " >
+                        <option value="all" {{ app('request')->input('branch') == 'all' ? 'selected' : ''}}>All</option>
+
+                        @foreach ($branches as $branch)
+                        <option value="{{ $branch->name }}" {{ app('request')->input('branch') == $branch->name ? 'selected' : ''}}>{{ $branch->name }}</option>
+                        @endforeach
+                    </select>
+                </form>
+
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left  text-gray-400">
                         <thead class="text-xs  uppercase  bg-gray-700 text-gray-400">
@@ -44,12 +53,15 @@
                                     Barber
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Branch
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Price
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Category
                                 </th>
-                               
+
                             </tr>
                         </thead>
                         <tbody>
@@ -66,15 +78,19 @@
                                         {{ $post->employeeInfo?->firstname .' '. $post->employeeInfo?->lastname  }}
                                     </td>
                                     <td class="px-6 py-4">
+                                        {{ $post->branch?->name }}
+                                    </td>
+                                    <td class="px-6 py-4">
                                         ₱{{ $post->price }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $post->category  }}
                                     </td>
 
-                                  
+
                                 </tr>
                             @empty
+                            <h1 class="text-red-500 font-bold">NO RESULT!</h1>
                             @endforelse
 
 

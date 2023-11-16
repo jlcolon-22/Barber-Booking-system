@@ -78,6 +78,7 @@ Route::post('/auth/password/reset/{id}',[AuthController::class,'reset_password']
         Route::get('/account',[AdminDashboardController::class,'account']);
         Route::get('/branch',[AdminDashboardController::class,'branch']);
         Route::post('/branch',[AdminDashboardController::class,'store_branch']);
+        Route::get('/branch/delete/{id}',[AdminDashboardController::class,'delete_branch']);
         Route::post('/branch/{id}',[AdminDashboardController::class,'update_branch']);
         Route::post('/account',[AdminDashboardController::class,'store_account']);
         Route::post('/account/{id}',[AdminDashboardController::class,'update_account']);

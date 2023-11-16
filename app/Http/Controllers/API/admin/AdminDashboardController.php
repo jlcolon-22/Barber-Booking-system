@@ -13,17 +13,24 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminDashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::query()->with('employeeInfo')->latest()->paginate(10);
-        
+        $branches =  Branch::orderBy('name','asc')->get();
+       if(!!$request->branch && $request->branch != 'all')
+        {
+            $branch = Branch::where('name','LIKE', '%'.$request->branch.'%')->first();
+            $posts = Post::query()->with('employeeInfo','branch')->where('owner_id',$branch->owner_id)->latest()->paginate(10);
+            return view("admin.Dashboard",compact('posts','branches'));
+        }
+        $posts = Post::query()->with('employeeInfo','branch')->latest()->paginate(10);
 
-        return view("admin.Dashboard",compact('posts'));
+
+        return view("admin.Dashboard",compact('posts','branches'));
     }
 
     public function appointment()
     {
-   
+
         $appointments = Reservation::with('postInfo','branchInfo')->orderBy('id','desc')->paginate(10);
         return view('admin.reservation',compact('appointments'));
     }
@@ -46,7 +53,7 @@ class AdminDashboardController extends Controller
            $request->validate([
             'password' => 'required|min:8',
             'email' => 'required|email|unique:users',
-            
+
         ]);
         $user = User::query()->create([
             "firstname"=> ucfirst($request->firstname),
@@ -135,12 +142,18 @@ class AdminDashboardController extends Controller
              if(!!$id->photo)
              {
                 unlink(substr($id->photo, 1));
-            
+
              }
               $id->update([
                 'photo'=>'/storage/branch/'.$filename
              ]);
              $request->photo->storeAs('public/branch',$filename);
         }
+    }
+    public function delete_branch(Branch $id)
+    {
+        Reservation::where('branch_id',$id->id)->delete();
+        $id->delete();
+        return back()->with('success','true');
     }
 }

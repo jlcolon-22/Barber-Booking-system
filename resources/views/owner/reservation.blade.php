@@ -108,10 +108,10 @@
                                        {{$appointment->time}}
                                     </td>
                                     <td class="px-6 py-4">
-                                       {{ $appointment->branchInfo->name}}
+                                       {{ $appointment->branchInfo?->name}}
                                     </td>
                                     <td class="px-6 py-4">
-                                       {{$appointment->branchInfo->location}}
+                                       {{$appointment->branchInfo?->location}}
                                     </td>
                                     <td class="px-6 py-4">
                                         @if ($appointment->status == 1)
@@ -149,9 +149,11 @@
                     </table>
                     <div class="py-5 px-1">
                         @if(!session()->has('error'))
-                            {{  $appointments->links('pagination::tailwind') }}
+                           @if (!!$appointments)
+                                {{  $appointments->links('pagination::tailwind') }}
+                           @endif
                         @endif
-                        // {{-- {{ session()->has('error') ? ' ' :  $appointments->links('pagination::tailwind') }} --}}
+                     {{-- {{ session()->has('error') ? ' ' :  $appointments->links('pagination::tailwind') }} --}}
                     </div>
                 </div>
 

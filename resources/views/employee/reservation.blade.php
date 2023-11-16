@@ -21,7 +21,7 @@
                         </a>
                     </li>
 
-                  
+
                 </ol>
             </nav>
 
@@ -33,11 +33,11 @@
   </svg>
   <span class="sr-only">Info</span>
   <div>
-    <span class="font-medium">Your status change was successful!</span> 
+    <span class="font-medium">Your status change was successful!</span>
   </div>
 </div>
 
-        
+
 
               @endif
 
@@ -75,7 +75,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+
                             @forelse($appointments as $appointment)
                              <tr class=" border-b bg-gray-900 border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
@@ -88,18 +88,18 @@
                                     </td>
                                     <td class="px-6 py-4">
                                        {{$appointment->postInfo->category}}
-                                    </td>                                  
+                                    </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                        {{\Carbon\Carbon::parse($appointment->date)->format('d-m-Y')}}
-                                    </td>                                 
+                                    </td>
                                        <td class="px-6 py-4">
                                        {{$appointment->time}}
                                     </td>
                                     <td class="px-6 py-4">
-                                       {{ $appointment->branchInfo->name}}
+                                       {{ $appointment->branchInfo?->name}}
                                     </td>
                                     <td class="px-6 py-4">
-                                       {{$appointment->branchInfo->location}}
+                                       {{$appointment->branchInfo?->location}}
                                     </td>
                                     <td class="px-6 py-4">
                                         @if ($appointment->status == 1)
@@ -115,11 +115,11 @@
 
                                     <td class="px-6 py-4  ">
                                        @if($appointment->status != 3)
-                                         <a href="/employee/appointment/{{$appointment->id}}/done" class="px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">done</a>                                        
-                                        
+                                         <a href="/employee/appointment/{{$appointment->id}}/done" class="px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">done</a>
+
                                        @endif
-                                 
-                                       
+
+
                                     </td>
                                 </tr>
                             @empty
@@ -129,14 +129,14 @@
 
 
 
-                 
+
 
                         </tbody>
                     </table>
                     <div class="py-5 px-1">
                        {{ $appointments->links('pagination::tailwind') }}
                     </div>
-                </div> 
+                </div>
 
             </main>
         </div>

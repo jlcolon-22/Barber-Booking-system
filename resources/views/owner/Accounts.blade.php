@@ -46,7 +46,7 @@
                   </svg>
                   <span class="sr-only">Info</span>
                   <div>
-                    <span class="font-medium">Successful Deleted!</span> 
+                    <span class="font-medium">Successful Deleted!</span>
                   </div>
                 </div>
 

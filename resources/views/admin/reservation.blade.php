@@ -35,7 +35,7 @@
             </nav>
 
             <main class="pt-10">
-              
+
 
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -66,11 +66,11 @@
                                    Status
                                 </th>
 
-                             
+
                             </tr>
                         </thead>
                         <tbody>
-                           
+
                             @forelse($appointments as $appointment)
                              <tr class=" border-b bg-gray-900 border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
@@ -85,15 +85,15 @@
                                     </td>
                                       <td class="px-6 py-4 whitespace-nowrap">
                                        {{\Carbon\Carbon::parse($appointment->date)->format('d-m-Y')}}
-                                    </td>                                 
+                                    </td>
                                        <td class="px-6 py-4">
                                        {{$appointment->time}}
                                     </td>
                                     <td class="px-6 py-4">
-                                       {{ $appointment->branchInfo->name}}
+                                       {{ $appointment->branchInfo?->name}}
                                     </td>
                                     <td class="px-6 py-4">
-                                       {{$appointment->branchInfo->location}}
+                                       {{$appointment->branchInfo?->location}}
                                     </td>
                                     <td class="px-6 py-4">
                                         @if ($appointment->status == 1)
@@ -107,7 +107,7 @@
                                         @endif
                                     </td>
 
-                                    
+
                                 </tr>
                             @empty
 
@@ -116,7 +116,7 @@
 
 
 
-                 
+
 
                         </tbody>
                     </table>

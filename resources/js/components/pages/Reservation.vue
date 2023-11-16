@@ -251,6 +251,4 @@ const store = async () => {
   z-index: 100;
   color: white;
 }
-.dp__instance_calendar {
-}
 </style>
