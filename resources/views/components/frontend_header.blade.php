@@ -151,20 +151,20 @@
                 class="flex flex-col font-medium p-4 md:p-0 mt-4 border  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0  bg-gray-800 md:bg-gray-900 border-gray-700">
                 <li>
                     <a href="/"
-                        class="{{ request()->is('/') ? ' block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 md:text-blue-500' : 'block py-2 pl-3 pr-4 text-gray-900 rounded  md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700' }}"
+                        class="{{ request()->is('/') ? ' block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 md:text-blue-500' : 'block py-2 pl-3 pr-4  rounded  md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700' }}"
                         aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="/services"
-                        class="{{ request()->is('services') ? ' block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 md:text-blue-500' : 'block py-2 pl-3 pr-4 text-gray-900 rounded  md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700' }}">Services</a>
+                        class="{{ request()->is('services') ? ' block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 md:text-blue-500' : 'block py-2 pl-3 pr-4 rounded  md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700' }}">Services</a>
                 </li>
                 <li>
                     <a href="/about"
-                        class="{{ request()->is('about') ? ' block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 md:text-blue-500' : 'block py-2 pl-3 pr-4 text-gray-900 rounded  md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700' }}">About</a>
+                        class="{{ request()->is('about') ? ' block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 md:text-blue-500' : 'block py-2 pl-3 pr-4  rounded  md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700' }}">About</a>
                 </li>
                 <li>
                     <a href="/contact"
-                        class="{{ request()->is('contact') ? ' block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 md:text-blue-500' : 'block py-2 pl-3 pr-4 text-gray-900 rounded  md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700' }}">Contact</a>
+                        class="{{ request()->is('contact') ? ' block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 md:text-blue-500' : 'block py-2 pl-3 pr-4  rounded  md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700' }}">Contact</a>
                 </li>
 
             </ul>
