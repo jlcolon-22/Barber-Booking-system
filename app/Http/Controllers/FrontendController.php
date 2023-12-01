@@ -11,6 +11,8 @@ use App\Models\Reservation;
 use App\Models\Feedback;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
 class FrontendController extends Controller
 {
 
@@ -32,7 +34,7 @@ class FrontendController extends Controller
             'email' => $request->email,
             'message' => $request->message,
         ];
-        \Mail::to('Onlinebarbershopreservation@gmail.com')->send(new \App\Mail\ContactMail($data));
+        Mail::to('Onlinebarbershopreservation@gmail.com')->send(new \App\Mail\ContactMail($data));
         return back()->with('success','true');
     }
 
@@ -48,9 +50,9 @@ class FrontendController extends Controller
     {
 
         $offer = Post::query()->with('branch')->where('id',$request->q)->first();
-       
+
         return view('pages.reservation',compact('offer'));
-    } 
+    }
 
     public function store_reservation(Request $request)
     {
@@ -64,7 +66,7 @@ class FrontendController extends Controller
         {
             return response()->json('true',204);
         }
-   
+
         Reservation::create([
             'firstname'=>$request->firstname,
             'email'=>$request->email,
@@ -84,7 +86,7 @@ class FrontendController extends Controller
             'time'=>$request->time['hours'].':'.$request->time['minutes'],
             'message'=>'You have successfully submitted the reservation request. Please wait for us to approve your reservation.'
         ];
-         \Mail::to($request->email)->send(new \App\Mail\Reservation($data));
+         Mail::to($request->email)->send(new \App\Mail\Reservation($data));
         $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
          $owner = [
             'name' => $request->firstname.' '.$request->lastname,
@@ -93,12 +95,12 @@ class FrontendController extends Controller
             'time'=>$request->time['hours'].':'.$request->time['minutes'],
             'message'=>$request->firstname.' '.$request->lastname.' submitted a reservation request.'
          ];
-            \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
+            Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 
         if($owners)
         {
             foreach ($owners as $key => $value) {
-                \Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
+                Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
             }
         }
 
@@ -108,7 +110,7 @@ class FrontendController extends Controller
 
         $appointments = Reservation::with('postInfo','branchInfo')->where('user_id',Auth::id())->latest()->paginate(10);
         return view('pages.appointment' ,compact('appointments'));
-    } 
+    }
     public function update_appointment(Reservation $id)
     {
 
@@ -123,7 +125,7 @@ class FrontendController extends Controller
             'time'=>$id->time,
             'message'=>'Your cancellation of the reservation request was successful.'
         ];
-         \Mail::to($id->email)->send(new \App\Mail\Reservation($data));
+         Mail::to($id->email)->send(new \App\Mail\Reservation($data));
         $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
          $owner = [
                   'name' => $id->firstname.' '.$id->lastname,
@@ -132,12 +134,12 @@ class FrontendController extends Controller
             'time'=>$id->time,
             'message'=>$id->firstname.' '.$id->lastname." canceled the reservation request."
          ];
-            \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
+            Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 
         if($owners)
         {
             foreach ($owners as $key => $value) {
-                \Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
+                Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
             }
         }
         return back()->with('success','true');
@@ -154,8 +156,8 @@ class FrontendController extends Controller
          if (!!$request->password) {
             $request->validate([
             'password' => 'min:8',
-           
-            
+
+
         ]);
          }
         $id->update([
@@ -173,7 +175,7 @@ class FrontendController extends Controller
             $filename = time().'-employee.'.$request->profile->extension();
             if(!!$id->profile)
             {
-                
+
             if($id->profile[0] != 'h')
             {
                  unlink(substr($id->profile, 1));
@@ -200,7 +202,7 @@ class FrontendController extends Controller
             $q->with('userInfo');
         })->where('id',$request->q)->first();
         $owner = User::with('posts','certificates')->where('id',$branch->owner_id)->first();
-      
+
         return view('pages.branch',compact('branch','owner'));
     }
 }

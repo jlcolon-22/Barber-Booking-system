@@ -4,24 +4,25 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Branch;
 use App\Models\Certificate;
 use App\Models\Reservation;
-use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class OwnerController extends Controller
 {
 
     public function post_delete(Post $id)
     {
-       
+
         Reservation::where('post_id',$id->id)->delete();
  $id->delete();
         return back()->with('success','true');
-    } 
+    }
     public function account_delete(User $id)
     {
         $id->delete();
@@ -43,7 +44,7 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
             'time'=>$id->time,
             'message'=>'Your request has been approved.'
         ];
-         \Mail::to($id->email)->send(new \App\Mail\Reservation($data));
+         Mail::to($id->email)->send(new \App\Mail\Reservation($data));
         $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
          $owner = [
                   'name' => $id->firstname.' '.$id->lastname,
@@ -52,12 +53,12 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
             'time'=>$id->time,
             'message'=>$id->firstname.' '.$id->lastname." reservation request has been approved."
          ];
-            \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
+            Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 
         if($owners)
         {
             foreach ($owners as $key => $value) {
-                \Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
+                Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
             }
         }
         return back()->with('success','true');
@@ -75,7 +76,7 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
             'time'=>$id->time,
             'message'=>'Your request has been canceled.'
         ];
-         \Mail::to($id->email)->send(new \App\Mail\Reservation($data));
+         Mail::to($id->email)->send(new \App\Mail\Reservation($data));
         $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
          $owner = [
                   'name' => $id->firstname.' '.$id->lastname,
@@ -84,12 +85,12 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
             'time'=>$id->time,
             'message'=>$id->firstname.' '.$id->lastname." reservation request has been canceled."
          ];
-            \Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
+            Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 
         if($owners)
         {
             foreach ($owners as $key => $value) {
-                \Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
+                Mail::to($value->email)->send(new \App\Mail\Reservation($owner));
             }
         }
         return back()->with('success','true');
@@ -132,7 +133,7 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
     {
         $employees = User::select('firstname','lastname','id')->where('role',1)->where('owner_id',Auth::id())->get();
         $posts = Post::query()->with('employeeInfo')->where('owner_id',Auth::id())->latest()->paginate(10);
-        
+
 
         return view("owner.Dashboard",compact('employees','posts'));
     }
@@ -147,7 +148,7 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
          $request->validate([
             'password' => 'required|min:8',
             'email' => 'required|email|unique:users',
-            
+
         ]);
         $user = User::query()->create([
             "firstname"=> ucfirst($request->firstname),
@@ -229,7 +230,7 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
              'price'=>$request->price,
             'category'=>$request->category
         ]);
-  
+
         if(!!$request->photo)
         {
 
