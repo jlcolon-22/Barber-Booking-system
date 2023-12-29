@@ -1,0 +1,11 @@
+conversation
+    -id
+    -user_one
+    -user_two
+
+message
+    -id
+    -conversation_id
+    -sender_id
+    -body
+    -created_at

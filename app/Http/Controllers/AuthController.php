@@ -25,7 +25,7 @@ class AuthController extends Controller
             Auth::login($id);
 
                 return redirect()->intended('/');
-            
+
         }
     }
     public function password($id)
@@ -58,11 +58,11 @@ class AuthController extends Controller
     public function store_signup(Request $request)
     {
          $url = env('APP_MAIN_DOMAIN');
- 
+
       $request->validate([
             'password' => 'required|min:8',
             'email' => 'required|email|unique:users',
-            
+
         ]);
 
         $user = User::create([
@@ -173,10 +173,11 @@ class AuthController extends Controller
     }
     public function userLogout(Request $request)
     {
+        Auth::logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        Auth::logout();
 
         return redirect('/auth/login');
     }
