@@ -90,6 +90,12 @@ Route::middleware(['admin.only'])->prefix('admin')->group(function () {
     Route::post('/branch/{id}', [AdminDashboardController::class, 'update_branch']);
     Route::post('/account', [AdminDashboardController::class, 'store_account']);
     Route::post('/account/{id}', [AdminDashboardController::class, 'update_account']);
+
+    // message
+    Route::get('/message',[AdminDashboardController::class, 'message']);
+    Route::get('/message/convo/{convoId}', [AdminDashboardController::class, 'view_message']);
+    Route::get('/all/message/{branch_id}', [AdminDashboardController::class, 'owner_fetch_message']);
+    Route::post('/message/convo/{branch_id}', [AdminDashboardController::class, 'admin_store_message']);
 });
 
 // Owner

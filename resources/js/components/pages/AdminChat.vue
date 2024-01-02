@@ -2,11 +2,7 @@
   <div class="fixed bottom-4 right-4">
     <main class="relative">
       <div class="">
-        <button
-          v-if="!!user_id"
-          @click="toggleChat = !toggleChat"
-          class="bg-blue-500 p-3 rounded-full"
-        >
+        <button v-if="!!user_id" @click="showChat" class="bg-blue-500 p-3 rounded-full">
           Chat Us
         </button>
         <a href="/auth/login" v-else class="bg-blue-500 p-3 rounded-full"> Chat Us </a>
@@ -54,6 +50,12 @@ const bottom = ref(null);
 const toggleChat = ref(false);
 const body = ref("");
 const messages = ref([]);
+const showChat = async () => {
+  toggleChat.value = await !toggleChat.value;
+  setTimeout(() => {
+    bottom.value.scrollIntoView();
+  }, 500);
+};
 const store = async () => {
   const { data } = await axios.post("/admins/message", { body: body.value });
   await messages.value.push(data);

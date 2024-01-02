@@ -182,8 +182,10 @@ class FrontendController extends Controller
     {
 
         $request->validate([
-            'number' => 'required|numeric|digits:11'
+            // 'number' => 'required|numeric|digits:11'
+            'number' => 'required|numeric|digits:11|regex:/(0)[0-9]{9}/'
         ]);
+
         $check = Reservation::where('date', $request->date)->where('branch_id', $request->branch_id)->get()->count();
         // Check if the given date meets the maximum bookings per day.
         if ($check == 10) {
@@ -200,6 +202,7 @@ class FrontendController extends Controller
             'branch_id' => $request->branch_id,
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
+            'status'=>1
         ]);
         $branch = Branch::with('ownerInfo')->where('id', $request->branch_id)->first();
         $data = [

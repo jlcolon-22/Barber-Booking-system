@@ -2,17 +2,49 @@
 
 namespace App\Http\Controllers\API\admin;
 
-use App\Models\Branch;
 use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Branch;
+use App\Models\Message;
 use App\Models\Reservation;
+use App\Models\Conversation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminDashboardController extends Controller
 {
+    public function admin_store_message(Request $request, $convoId)
+    {
+
+        $message = Message::query()->create([
+            'conversation_id' => $convoId,
+            'body' => $request->body,
+            'sender_id' => Auth::id()
+        ]);
+        return response()->json($message);
+    }
+    public function owner_fetch_message($convoId)
+    {
+
+        $messages = Message::query()->where('conversation_id', $convoId)->get();
+        return response()->json($messages);
+    }
+    public function view_message($convoId)
+    {
+        $branch = Conversation::query()->with('customerInfo', function ($q) {
+            $q->with('branch');
+        })->where('id', $convoId)->first();
+
+        return view('admin.chat_convo', compact('branch'));
+    }
+    public function message()
+    {
+        $branches = Conversation::query()->with('customerInfo')->where('type',1)->get();
+        return view('admin.Message',compact('branches'));
+    }
     public function index(Request $request)
     {
         $branches =  Branch::orderBy('name','asc')->get();

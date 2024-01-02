@@ -4,6 +4,7 @@ import {createApp} from 'vue';
 import Example from './components/Example.vue'
 import Account from './components/admin/Account.vue'
 import AccountEdit from './components/admin/AccountEdit.vue'
+import ChatAdmin from './components/admin/Chat.vue'
 
 import Branch from './components/admin/Branch.vue'
 import BranchEdit from './components/admin/BranchEdit.vue'
@@ -32,6 +33,7 @@ app.component('frontend_reservation', FrontReservation);
 app.component('Chat', Chat);
 app.component('Services', Services);
 app.component('admin_chat', AdminChat);
+app.component('chat_admin', ChatAdmin);
 
 // owner
 app.component('account_owner', AccountOwner);
