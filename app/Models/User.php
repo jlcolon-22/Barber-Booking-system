@@ -9,19 +9,25 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Post;
 use App\Models\Certificate;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
 
-
-     public function posts()
+    public function posts()
     {
-        return $this->hasMany(Post::class, 'owner_id' ,'id');
+        return $this->hasMany(Post::class, 'owner_id', 'id');
     }
-     public function certificates()
+
+    public function certificates()
     {
-        return $this->hasMany(Certificate::class, 'owner_id' ,'id');
+        return $this->hasMany(Certificate::class, 'owner_id', 'id');
+    }
+
+    public function branch()
+    {
+        return $this->hasMany(Branch::class, 'owner_id', 'id');
     }
 
     /**
@@ -39,7 +45,6 @@ class User extends Authenticatable
         'role',
         'owner_id'
     ];
-
 
 
     /**

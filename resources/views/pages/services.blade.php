@@ -1,15 +1,15 @@
-    @extends('layouts.app')
+@extends('layouts.app')
 
 
 
-    @section('content')
+@section('content')
     <x-frontend_header/>
 
 
     <main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center   origin-bottom items-center z-50  ">
-     
+
         {{-- <section class="grid grid-cols-3 px-10 py-10"> --}}
-            
+
         {{--   @forelse($branches as $branch)
           <div class="w-full h-fit max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class=" min-h-[16rem] max-h-[16rem] overflow-hidden relative">
@@ -24,7 +24,7 @@
             </a>
 
             <div class="flex items-center justify-end">
-        
+
                 <a href="/view?branch={{$branch->name}}&q={{$branch->id}}" class="text-blue-600">View</a>
             </div>
         </div>
@@ -34,23 +34,28 @@
 
     @endforelse --}}
 
-    {{-- </section> --}}
-       <section  class=" px-10 py-10  min-h-[100svh]  bg-black bg-opacity-80">
-        <h1 class="text-center font-bold  pb-10">Choose Location</h1>
-            <map_branch locations="{{ $branches }}"></map_branch>
-       </section>
+        {{-- </section> --}}
+        <section class=" px-10 py-10  min-h-[100svh]  bg-black bg-opacity-80">
+            {{--        <h1 class="text-center font-bold  pb-10">Choose Location</h1>--}}
+            {{--            <map_branch locations="{{ $branches }}"></map_branch>--}}
+
+            <Services locations="{{ $datas }}"></Services>
+            @if ($branches->lastPage() != 1)
+            <div class="p-2 bg-white mt-20 rounded ">
+                {{ $branches->links() }}
+            </div>
+            @endif
+
+        </section>
     </main>
+    <admin_chat user_id="{{Auth::id()}}"></admin_chat>
+@endsection
 
-
-
-    @endsection
-
-    @section('scripts')
-
+@section('scripts')
 
     <script>
-        
-       // const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
+
+        // const dropdownUserAvatarButton = document.querySelector('#dropdownUserAvatarButton');
         // const dropdownAvatar = document.querySelector('#dropdownAvatar');
         // dropdownUserAvatarButton.addEventListener('click',function(){
 
@@ -68,4 +73,4 @@
             navbarUser.classList.toggle('hidden')
         }
     </script>
-    @endsection
+@endsection

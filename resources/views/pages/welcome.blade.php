@@ -32,6 +32,7 @@
             </div>
         </section>
     </main>
+    <admin_chat user_id="{{Auth::id()}}"></admin_chat>
 @endsection
 
 @section('scripts')

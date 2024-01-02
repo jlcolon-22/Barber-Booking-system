@@ -8,6 +8,7 @@
     <frontend_reservation data="{{$offer}}" user="{{Auth::user()}}"></frontend_reservation>
 
 </main>
+<admin_chat user_id="{{Auth::id()}}"></admin_chat>
 @endsection
 
 @section('scripts')

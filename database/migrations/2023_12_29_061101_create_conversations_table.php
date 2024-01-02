@@ -14,9 +14,10 @@ class CreateConversationsTable extends Migration
     public function up()
     {
         Schema::create('conversations', function (Blueprint $table) {
-            $table->uuid('uuid');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_one');
             $table->unsignedBigInteger('user_two');
+            $table->boolean('read')->default(0);
             $table->timestamps();
         });
     }

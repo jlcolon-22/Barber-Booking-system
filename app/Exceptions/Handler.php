@@ -35,9 +35,9 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
-                return redirect('/auth/login');
-            }
+//            if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+//                return redirect('/auth/login');
+//            }
         });
     }
 }
