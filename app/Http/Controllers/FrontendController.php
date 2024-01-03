@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Reservation;
 use App\Models\Feedback;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -20,6 +21,21 @@ use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
+    public function getBranchDate($branch_id)
+    {
+        $branches = Reservation::query()->where('branch_id',$branch_id)->get('date')->groupBy('date');
+        $dates = [];
+        foreach($branches as $branch)
+        {
+            if(count($branch) == 10)
+            {
+                $dates[] = $branch[0];
+            }
+
+        }
+
+        return response()->json($dates);
+    }
     public function admin_message_fetch()
     {
         if(Auth::check())
@@ -198,7 +214,7 @@ class FrontendController extends Controller
             'lastname' => $request->lastname,
             'number' => $request->number,
             'time' => $request->time['hours'] . ':' . $request->time['minutes'],
-            'date' => $request->date,
+            'date' => Carbon::parse($request->date)->format('Y-m-d'),
             'branch_id' => $request->branch_id,
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),

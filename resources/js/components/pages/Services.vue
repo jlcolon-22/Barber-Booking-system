@@ -14,7 +14,7 @@
           >view</a
         > -->
         <input
-          @click="openCalendar"
+          @click="openCalendar(`/view?branch=${branch.name}&q=${branch.id}`, branch.id)"
           type="button"
           value="view"
           class="bg-blue-500 text-center py-2"
@@ -34,12 +34,9 @@
           expanded
           :disabled-dates="disabledDates"
           :min-date="new Date()"
+          :masks="masks"
         />
-        <div>
-          <h1 class="text-center text-2xl py-5 font-bold">
-            The available time for the selected date
-          </h1>
-        </div>
+
         <div class="px-3"></div>
         <div class="py-3 flex justify-end">
           <button @click="closeCalendar" class="bg-red-500 py-2 px-4 rounded text-white">
@@ -51,22 +48,44 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { DatePicker } from "v-calendar";
+import axios from "axios";
 import "v-calendar/style.css";
 const date = ref("");
+const masks = ref({
+  input: "YYYY-MM-DD",
+});
+const url = ref("");
 const props = defineProps(["locations"]);
 const branches = ref([]);
-const calendar = ref(true);
-const timeContainer = ref(false);
-const timeAvailable = ref([]);
+const calendar = ref(false);
+
 const disabledDates = ref([
   { start: new Date(2024, 0, 7), end: new Date(2024, 0, 7) },
   { start: new Date(2024, 0, 19), end: new Date(2024, 0, 19) },
 ]);
+watch(date, (n, o) => {
+  //   calendar.value = false;
+  var inputDate = new Date(n);
 
-const openCalendar = () => {
+  const fulldate = `${
+    inputDate.getMonth() + 1
+  }-${inputDate.getDate()}-${inputDate.getFullYear()}`;
+  date.value = fulldate;
+  window.location.href = url.value + `&date=${fulldate}`;
+});
+const getBranchDate = async (branch_id) => {
+  const { data } = await axios.post("/services/branch/" + branch_id);
+  disabledDates.value = data.map((value) => {
+    return { start: value.date, end: value.date };
+  });
+  console.log(data);
+};
+const openCalendar = (urls, id) => {
   calendar.value = !calendar.value;
+  getBranchDate(id);
+  url.value = urls;
 };
 const closeCalendar = () => {
   calendar.value = !calendar.value;

@@ -62,6 +62,7 @@ Route::post('/contact', [FrontendController::class, 'contact']);
 
 
 Route::get('/services', [FrontendController::class, 'services']);
+Route::post('/services/branch/{branch_id}',[FrontendController::class,'getBranchDate']);
 Route::get('/view', [FrontendController::class, 'branch']);
 Route::post('/feedback', [FrontendController::class, 'feedback']);
 
