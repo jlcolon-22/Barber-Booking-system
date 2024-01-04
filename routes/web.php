@@ -86,6 +86,7 @@ Route::middleware(['admin.only'])->prefix('admin')->group(function () {
     Route::get('appointment', [AdminDashboardController::class, 'appointment']);
     Route::get('/account', [AdminDashboardController::class, 'account']);
     Route::get('/branch', [AdminDashboardController::class, 'branch']);
+
     Route::post('/branch', [AdminDashboardController::class, 'store_branch']);
     Route::get('/branch/delete/{id}', [AdminDashboardController::class, 'delete_branch']);
     Route::post('/branch/{id}', [AdminDashboardController::class, 'update_branch']);
@@ -97,6 +98,10 @@ Route::middleware(['admin.only'])->prefix('admin')->group(function () {
     Route::get('/message/convo/{convoId}', [AdminDashboardController::class, 'view_message']);
     Route::get('/all/message/{branch_id}', [AdminDashboardController::class, 'owner_fetch_message']);
     Route::post('/message/convo/{branch_id}', [AdminDashboardController::class, 'admin_store_message']);
+
+    // reports
+    Route::get('/reports', [AdminDashboardController::class, 'reports']);
+    Route::post('/reports', [AdminDashboardController::class, 'get_reports']);
 });
 
 // Owner

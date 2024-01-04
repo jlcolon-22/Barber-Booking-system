@@ -249,6 +249,32 @@ class FrontendController extends Controller
 
     public function appointment()
     {
+        $reservations = Reservation::where('status','!=',2)->where('status','!=',3)->latest()->get();
+        foreach($reservations as $value)
+        {
+            $now = Carbon::now();
+            $date = Carbon::parse($value->date);
+            $checkDate = $date->diffInDays($now,false);
+
+            if($checkDate == 0)
+            {
+                $resev = Carbon::parse($value->time);
+
+                $checkTime = $resev->diffInMinutes($now,false);
+
+                if($checkTime >= 0)
+                {
+                    $value->update(['status'=>3]);
+                }
+
+
+            }
+            elseif($checkDate > 0)
+            {
+                $value->update(['status'=>3]);
+            }
+
+        }
 
         $appointments = Reservation::with('postInfo', 'branchInfo')->where('user_id', Auth::id())->latest()->paginate(10);
         return view('pages.appointment', compact('appointments'));

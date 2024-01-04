@@ -1,10 +1,13 @@
 require('./bootstrap');
 import {createApp} from 'vue';
+import print from 'vue3-print-nb'
+
 
 import Example from './components/Example.vue'
 import Account from './components/admin/Account.vue'
 import AccountEdit from './components/admin/AccountEdit.vue'
 import ChatAdmin from './components/admin/Chat.vue'
+import Reports from './components/admin/Reports.vue'
 
 import Branch from './components/admin/Branch.vue'
 import BranchEdit from './components/admin/BranchEdit.vue'
@@ -34,6 +37,7 @@ app.component('Chat', Chat);
 app.component('Services', Services);
 app.component('admin_chat', AdminChat);
 app.component('chat_admin', ChatAdmin);
+app.component('Reports', Reports);
 
 // owner
 app.component('account_owner', AccountOwner);
@@ -41,4 +45,6 @@ app.component('account_edit_owner', AccountEditOwner);
 app.component('post_owner', PostOwner);
 app.component('post_edit_owner', PostEditOwner);
 app.component('chat_owner', ChatOwner);
+
+app.use(print)
 app.mount('#app');

@@ -16,6 +16,61 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminDashboardController extends Controller
 {
+
+    public function get_reports(Request $request)
+    {
+        if($request->type == 'day')
+        {
+            $date = Carbon::parse($request->date)->format('Y-m-d');
+            $appointments = Reservation::query()->with('postInfo','branchInfo')->whereDate('date',$date)->get();
+            return response()->json($appointments);
+        }
+        if($request->type == 'month')
+        {
+            $date = $request->date;
+
+            $appointments = Reservation::query()->with('postInfo','branchInfo')->whereMonth('date',explode('-',$date)[1])->whereYear('date',explode('-',$date)[0])->get();
+            return response()->json($appointments);
+        }
+        if($request->type == 'years')
+        {
+            $date = $request->date;
+            $appointments = Reservation::query()->with('postInfo','branchInfo')->whereYear('date',$date)->get();
+            return response()->json($appointments);
+        }
+        return response()->json($request->all());
+    }
+    public function reports()
+    {
+        $reservations = Reservation::where('status','!=',2)->where('status','!=',3)->latest()->get();
+        foreach($reservations as $value)
+        {
+            $now = Carbon::now();
+            $date = Carbon::parse($value->date);
+            $checkDate = $date->diffInDays($now,false);
+
+            if($checkDate == 0)
+            {
+                $resev = Carbon::parse($value->time);
+
+                $checkTime = $resev->diffInMinutes($now,false);
+
+                if($checkTime >= 0)
+                {
+                    $value->update(['status'=>3]);
+                }
+
+
+            }
+            elseif($checkDate > 0)
+            {
+                $value->update(['status'=>3]);
+            }
+
+        }
+
+        return view('admin.Reports');
+    }
     public function admin_store_message(Request $request, $convoId)
     {
 
@@ -47,6 +102,32 @@ class AdminDashboardController extends Controller
     }
     public function index(Request $request)
     {
+        $reservations = Reservation::where('status','!=',2)->where('status','!=',3)->latest()->get();
+        foreach($reservations as $value)
+        {
+            $now = Carbon::now();
+            $date = Carbon::parse($value->date);
+            $checkDate = $date->diffInDays($now,false);
+
+            if($checkDate == 0)
+            {
+                $resev = Carbon::parse($value->time);
+
+                $checkTime = $resev->diffInMinutes($now,false);
+
+                if($checkTime >= 0)
+                {
+                    $value->update(['status'=>3]);
+                }
+
+
+            }
+            elseif($checkDate > 0)
+            {
+                $value->update(['status'=>3]);
+            }
+
+        }
         $branches =  Branch::orderBy('name','asc')->get();
        if(!!$request->branch && $request->branch != 'all')
         {

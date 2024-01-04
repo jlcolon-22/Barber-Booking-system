@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Conversation;
-use App\Models\Message;
+use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Branch;
+use App\Models\Message;
 use App\Models\Certificate;
 use App\Models\Reservation;
+use App\Models\Conversation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -168,6 +169,32 @@ class OwnerController extends Controller
 
     public function index()
     {
+        $reservations = Reservation::where('status','!=',2)->where('status','!=',3)->latest()->get();
+        foreach($reservations as $value)
+        {
+            $now = Carbon::now();
+            $date = Carbon::parse($value->date);
+            $checkDate = $date->diffInDays($now,false);
+
+            if($checkDate == 0)
+            {
+                $resev = Carbon::parse($value->time);
+
+                $checkTime = $resev->diffInMinutes($now,false);
+
+                if($checkTime >= 0)
+                {
+                    $value->update(['status'=>3]);
+                }
+
+
+            }
+            elseif($checkDate > 0)
+            {
+                $value->update(['status'=>3]);
+            }
+
+        }
         $employees = User::select('firstname', 'lastname', 'id')->where('role', 1)->where('owner_id', Auth::id())->get();
         $posts = Post::query()->with('employeeInfo')->where('owner_id', Auth::id())->latest()->paginate(10);
 
