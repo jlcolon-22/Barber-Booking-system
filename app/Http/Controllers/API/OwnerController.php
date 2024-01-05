@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Branch;
 use App\Models\Message;
+use App\Events\ChatMessage;
 use App\Models\Certificate;
 use App\Models\Reservation;
 use App\Models\Conversation;
@@ -26,7 +27,8 @@ class OwnerController extends Controller
             'body' => $request->body,
             'sender_id' => Auth::id()
         ]);
-        return response()->json($message);
+        broadcast(new ChatMessage($message))->toOthers();
+        // return response()->json($message);
     }
 
     public function owner_fetch_message($convoId)

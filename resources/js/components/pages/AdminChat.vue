@@ -50,7 +50,7 @@ const bottom = ref(null);
 const toggleChat = ref(false);
 const body = ref("");
 const messages = ref([]);
-const channel = ref(null);
+const convoId = ref("");
 const showChat = async () => {
   toggleChat.value = await !toggleChat.value;
   setTimeout(() => {
@@ -59,18 +59,21 @@ const showChat = async () => {
 };
 
 const x = () => {
-  console.log("ss");
-  Echo.listen("ChatMessage", (e) => {
-    messages.value.push(e.data);
-    console.log(e);
+  //   console.log("ss");
+  window.Echo.private(`chat`).listen("ChatMessage", (e) => {
+    if (e.data.conversation_id == convoId.value) {
+      messages.value.push(e.data);
+      setTimeout(() => {
+        bottom.value.scrollIntoView();
+      }, 500);
+    }
   });
 };
 const store = async () => {
   const { data } = await axios.post("/admins/message", { body: body.value });
-  //   await x();
+  convoId.value = data;
+  //   await messages.value.push(data);
 
-  await messages.value.push(data);
-  bottom.value.scrollIntoView();
   body.value = "";
 };
 const fetch = async () => {
@@ -79,8 +82,8 @@ const fetch = async () => {
 };
 onBeforeMount(() => {}),
   onMounted(() => {
-    Echo.channel(`chat`);
-    // channel.value = window.Echo.channel(`chat`);
+    // private.value = window.Echo.private(`chat`);
+    x();
     if (!!props.user_id) {
       fetch();
     }

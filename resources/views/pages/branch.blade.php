@@ -8,7 +8,7 @@
 
     <main class="bg-[url('/assets/bg3.jpeg')]  bg-cover bg-center  min-h-[100svh] origin-bottom items-center z-50 ">
 
-        <section class=" px-10 py-10">
+        <section class="px-2 md:px-10 py-10">
 
 
             <div class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
@@ -109,7 +109,7 @@
             </div>
 
 
-            <div class="px-10 py-10 mt-10 bg-white">
+            <div class="px-2 md:px-10 py-10 mt-10 bg-white">
                 <h1 class="text-gray-900 text-2xl font-bold">Branch Offers</h1>
                 <section class="flex flex-wrap justify-center mt-6 gap-5">
 

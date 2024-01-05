@@ -33,14 +33,27 @@ const convoId = ref(null);
 const body = ref("");
 const messages = ref([]);
 const bottom = ref(null);
-
+const convoIds = ref("");
+const x = () => {
+  //   console.log("ss");
+  window.Echo.private(`chat`).listen("ChatMessage", (e) => {
+    if (e.data.conversation_id == props.convo_id) {
+      messages.value.push(e.data);
+      console.log(e);
+      setTimeout(() => {
+        bottom.value.scrollIntoView();
+      }, 500);
+    }
+  });
+};
 const store = async () => {
   const { data } = await axios.post("/admin/message/convo/" + convoId.value, {
     body: body.value,
   });
-  await messages.value.push(data);
+
+  //   await messages.value.push(data);
   body.value = "";
-  bottom.value.scrollIntoView();
+  //   bottom.value.scrollIntoView();
 };
 const fetch = async () => {
   const { data } = await axios.get("/admin/all/message/" + convoId.value);
@@ -48,7 +61,7 @@ const fetch = async () => {
 };
 onMounted(async () => {
   convoId.value = await props.convo_id;
-
+  await x();
   await fetch();
   bottom.value.scrollIntoView();
 });

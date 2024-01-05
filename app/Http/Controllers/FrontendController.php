@@ -130,7 +130,7 @@ class FrontendController extends Controller
                 'sender_id' => Auth::id()
             ])->toArray();
             broadcast(new ChatMessage($message))->toOthers();
-             return response()->json($message);
+             return response()->json($message['conversation_id']);
 
         } else {
             $convo = Conversation::query()
@@ -145,7 +145,9 @@ class FrontendController extends Controller
                         'body' => $request->body,
                         'sender_id' => Auth::id()
                     ]);
-            return response()->json($message);
+                    broadcast(new ChatMessage($message))->toOthers();
+                    return response()->json($convo->id);
+
         }
 
     }
@@ -164,8 +166,8 @@ class FrontendController extends Controller
             'body' => $request->body,
             'sender_id' => Auth::id()
         ]);
+        broadcast(new ChatMessage($message))->toOthers();
 
-        return response()->json($message);
     }
 
     public function view_convo($branch_id)

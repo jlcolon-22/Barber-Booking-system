@@ -45,7 +45,8 @@
                             {{--                    <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>--}}
                         </a>
                         {{--                        <Chat convo_id="{{$branch->id}}"></Chat>--}}
-                        <chat_admin convo_id="{{$branch->id}}" user_id="{{Auth::id()}}"></chat_admin>
+
+                        <chat_admin convo_id="{{$branch->id}}" user_id="{{Auth::id()}}" ></chat_admin>
                     </div>
 
                 </div>

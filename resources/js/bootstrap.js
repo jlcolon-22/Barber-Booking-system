@@ -20,16 +20,16 @@ import Echo from 'laravel-echo';
 
 window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key:'ff8be30191fb73038e16',
-    cluster: 'mt1',
-    encrypted: true,
+    key: '6a1737c080310163f327',
+    cluster: 'ap1',
     forceTLS: true
 });
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key:'6a1737c080310163f327',
+//     cluster: 'ap1',
+//     encrypted: true,
+//     forceTLS: true
+// });

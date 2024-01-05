@@ -25,7 +25,7 @@ class ChatMessage implements ShouldBroadcast
         $this->data = $data;
     }
     // public function broadcastAs() {
-    //     return 'chat.message';
+    //     return 'chat_message';
     // }
     /**
      * Get the channels the event should broadcast on.
@@ -34,6 +34,9 @@ class ChatMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chat');
+        return new PrivateChannel('chat');
     }
+
+
+
 }

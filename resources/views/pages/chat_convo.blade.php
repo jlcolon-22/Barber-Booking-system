@@ -23,7 +23,7 @@
                     </div>
                     {{--                    <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>--}}
                 </a>
-                <Chat convo_id="{{$branch->id}}" user_id="{{Auth::id()}}"></Chat>
+                <Chat convo_id="{{$branch->id}}" user_id="{{Auth::id()}}" ud></Chat>
             </div>
 
         </div>

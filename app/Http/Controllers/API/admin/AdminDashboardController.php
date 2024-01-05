@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\API\admin;
 
-use App\Models\BranchTime;
 use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Branch;
 use App\Models\Message;
+use App\Models\BranchTime;
+use App\Events\ChatMessage;
 use App\Models\Reservation;
 use App\Models\Conversation;
 use Illuminate\Http\Request;
@@ -80,7 +81,8 @@ class AdminDashboardController extends Controller
             'body' => $request->body,
             'sender_id' => Auth::id()
         ]);
-        return response()->json($message);
+        broadcast(new ChatMessage($message))->toOthers();
+        return response()->json($convoId);
     }
     public function owner_fetch_message($convoId)
     {
