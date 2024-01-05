@@ -126,10 +126,10 @@
                                     {{--  <branch_edit owners="{{ $owners }}" data="{{ $branch }}">
 
                                         </branch_edit owners="{{ $owners }}"> --}}
-                                    {{-- @if ($appointment->status != 3 && $appointment->status != 1) --}}
+                                    @if ($appointment->status != 3)
                                         <a href="/appointment/{{ $appointment->id }}"
                                             class="text-red-500 font-bold">Cancel</a>
-                                    {{-- @endif --}}
+                                     @endif
                                     @if ($appointment->status == 3)
                                         <button type="button" onclick="show(this)" data-x="{{ $appointment->branch_id }}"
                                             class="text-yellow-500 font-bold underline">Feedback</button>
@@ -148,7 +148,7 @@
                     </tbody>
                 </table>
                 <div class="py-5 px-1">
-                    {{-- {{ $branches->links('pagination::tailwind') }} --}}
+                    {{ $appointments->links('pagination::tailwind') }}
                 </div>
             </div>
 

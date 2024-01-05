@@ -5,10 +5,10 @@
 <x-frontend_header/>
 <main class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center pb-[5rem] pt-[3rem] min-h-[100svh] origin-bottom items-center z-50 px-3 ">
 
-    <frontend_reservation data="{{$offer}}" user="{{Auth::user()}}"></frontend_reservation>
+    <frontend_reservation data="{{$offer}}" user="{{Auth::user()}}" date="{{ request()->get('date') }}"></frontend_reservation>
 
 </main>
-<admin_chat user_id="{{Auth::id()}}"></admin_chat>
+<admin_chat user_id="{{Auth::id()}}" ></admin_chat>
 @endsection
 
 @section('scripts')

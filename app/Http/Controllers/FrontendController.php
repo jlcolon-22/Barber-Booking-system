@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChatMessage;
 use App\Models\Conversation;
 use App\Models\Message;
 use Illuminate\Support\Facades\Validator;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
 use App\Models\Branch;
+use App\Models\BranchTime;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Reservation;
@@ -21,20 +23,69 @@ use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
+    public function getBranchTIme(Request $request,Branch $id)
+    {
+        $check = BranchTime::where('date',$request->date)->where('branch_id',$id->id)->first();
+        if(!$check)
+        {
+            $start = Carbon::parse($id->start_time);
+            $end = Carbon::parse($id->end_time)->subHours(1);
+
+            if( $start->diffInHours($end) % 2 != 0)
+            {
+
+                $end = Carbon::parse($id->end_time)->subHour();
+
+            }
+            $currentDateTime = $start->copy();
+
+            while ($currentDateTime <= $end) {
+                $nextDateTime = $currentDateTime->copy()->addHour();
+
+                $x = $currentDateTime->format('h:ia') . ' to ' . $nextDateTime->format('h:ia');
+                BranchTime::create([
+                    'branch_id'=>$id->id,
+                    'time'=>$x,
+                    'date'=>$request->date
+                ]);
+                $currentDateTime = $nextDateTime;
+            }
+        }
+        return response()->json(BranchTime::where('branch_id',$id->id)->where('date',$request->date)->get());
+    }
     public function getBranchDate($branch_id)
     {
         $branches = Reservation::query()->where('branch_id',$branch_id)->get('date')->groupBy('date');
+        $times = BranchTime::query()->where('branch_id',$branch_id)->get()->groupBy('date');
         $dates = [];
-        foreach($branches as $branch)
+        $bol = true;
+        foreach($times as $key => $value)
         {
-            if(count($branch) == 10)
+            $bol = true;
+            foreach($value as $x)
             {
-                $dates[] = $branch[0];
+               if($x->status == 0)
+               {
+                    $bol = false;
+               }
             }
-
+            if($bol)
+            {
+                $dates[] = $key;
+            }
         }
-
         return response()->json($dates);
+        // $dates = [];
+        // foreach($branches as $branch)
+        // {
+        //     if(count($branch) == 10)
+        //     {
+        //         $dates[] = $branch[0];
+        //     }
+
+        // }
+
+        // return response()->json($all);
     }
     public function admin_message_fetch()
     {
@@ -77,8 +128,10 @@ class FrontendController extends Controller
                 'conversation_id' => $check->id,
                 'body' => $request->body,
                 'sender_id' => Auth::id()
-            ]);
+            ])->toArray();
+            broadcast(new ChatMessage($message))->toOthers();
              return response()->json($message);
+
         } else {
             $convo = Conversation::query()
             ->create([
@@ -111,6 +164,7 @@ class FrontendController extends Controller
             'body' => $request->body,
             'sender_id' => Auth::id()
         ]);
+
         return response()->json($message);
     }
 
@@ -126,8 +180,9 @@ class FrontendController extends Controller
     public function meessage()
     {
         $branches = Conversation::query()->with('ownerInfo', function ($q) {
-            $q->with('branch');
+            $q->with('branch')->where('role','!=',3);
         })->where('user_one', Auth::id())->get();
+
         return view('pages.chat', compact('branches'));
     }
 
@@ -213,19 +268,21 @@ class FrontendController extends Controller
             'email' => $request->email,
             'lastname' => $request->lastname,
             'number' => $request->number,
-            'time' => $request->time['hours'] . ':' . $request->time['minutes'],
+            'time' => $request->time,
             'date' => Carbon::parse($request->date)->format('Y-m-d'),
             'branch_id' => $request->branch_id,
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
             'status'=>1
         ]);
+        BranchTime::query()->where('branch_id',$request->branch_id)->where('time',$request->time)->update(['status'=>1]);
         $branch = Branch::with('ownerInfo')->where('id', $request->branch_id)->first();
         $data = [
             'name' => $request->firstname . ' ' . $request->lastname,
             'email' => $request->email,
             'date' => $request->date,
-            'time' => $request->time['hours'] . ':' . $request->time['minutes'],
+            'time' => $request->time,
+            'number' => $request->number,
             'message' => 'You have successfully submitted the reservation request. Please wait for us to approve your reservation.'
         ];
         Mail::to($request->email)->send(new \App\Mail\Reservation($data));
@@ -234,7 +291,8 @@ class FrontendController extends Controller
             'name' => $request->firstname . ' ' . $request->lastname,
             'email' => $request->email,
             'date' => $request->date,
-            'time' => $request->time['hours'] . ':' . $request->time['minutes'],
+            'time' => $request->time,
+            'number' => $request->number,
             'message' => $request->firstname . ' ' . $request->lastname . ' submitted a reservation request.'
         ];
         Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
@@ -258,7 +316,7 @@ class FrontendController extends Controller
 
             if($checkDate == 0)
             {
-                $resev = Carbon::parse($value->time);
+                $resev = Carbon::parse(explode(' to ',$value->time)[1]);
 
                 $checkTime = $resev->diffInMinutes($now,false);
 
@@ -367,7 +425,9 @@ class FrontendController extends Controller
             $q->with('userInfo');
         })->where('id', $request->q)->first();
         $owner = User::with('posts', 'certificates')->where('id', $branch->owner_id)->first();
+        $posts = Post::query()->where('owner_id',$owner->id)->get()->groupBy('category');
 
-        return view('pages.branch', compact('branch', 'owner'));
+
+        return view('pages.branch', compact('branch', 'owner','posts'));
     }
 }

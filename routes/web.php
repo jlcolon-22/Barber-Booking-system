@@ -59,6 +59,7 @@ Route::middleware('customer.only')->group(function () {
 });
 
 Route::post('/contact', [FrontendController::class, 'contact']);
+Route::post('/branch/time/{id}',[FrontendController::class,'getBranchTIme']);
 
 
 Route::get('/services', [FrontendController::class, 'services']);

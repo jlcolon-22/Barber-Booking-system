@@ -27,7 +27,7 @@ class EmployeeController extends Controller
 
             if($checkDate == 0)
             {
-                $resev = Carbon::parse($value->time);
+                $resev = Carbon::parse(explode(' to ',$value->time)[1]);
 
                 $checkTime = $resev->diffInMinutes($now,false);
 

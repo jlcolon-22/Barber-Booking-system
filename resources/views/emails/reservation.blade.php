@@ -8,6 +8,9 @@
 <span><h3>EMAIL:</h3>{{$data['email']}}</span>
 
 <br>
+<span><h3>NUMBER:</h3>{{$data['number']}}</span>
+
+<br>
 
 <span><h3>DATE:</h3>{{$data['date']}}</span>
 <br>

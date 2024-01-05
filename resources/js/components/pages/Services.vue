@@ -72,15 +72,18 @@ watch(date, (n, o) => {
   const fulldate = `${
     inputDate.getMonth() + 1
   }-${inputDate.getDate()}-${inputDate.getFullYear()}`;
-  date.value = fulldate;
+  //   date.value = fulldate;
+  //   console.log(date.value);
   window.location.href = url.value + `&date=${fulldate}`;
 });
 const getBranchDate = async (branch_id) => {
   const { data } = await axios.post("/services/branch/" + branch_id);
-  disabledDates.value = data.map((value) => {
-    return { start: value.date, end: value.date };
+  disabledDates.value = data.map((value, index) => {
+
+    return { start: value, end: value };
+
   });
-  console.log(data);
+  //   console.log(data);
 };
 const openCalendar = (urls, id) => {
   calendar.value = !calendar.value;

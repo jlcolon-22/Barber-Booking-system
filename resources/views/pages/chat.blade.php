@@ -11,17 +11,19 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-2">
                 @forelse($branches as $branch)
 
-                    <a href="/message/convo/{{$branch->id}}"
-                       class="bg-gray-600 flex items-center justify-between px-3 py-2 rounded">
-                        <div class="flex items-center gap-x-2">
-                            <img src="{{asset('assets/about.png')}}"
-                                 class="w-[2.5rem] h-[2.5rem] rounded-full border border-blue-500"
-                                 alt="">
-                            <h2>
-                                {{$branch->ownerInfo?->branch[0]?->name}}</h2>
-                        </div>
-                        {{--                        <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>--}}
-                    </a>
+                   @if ($branch->ownerInfo)
+                   <a href="/message/convo/{{$branch->id}}"
+                    class="bg-gray-600 flex items-center justify-between px-3 py-2 rounded">
+                     <div class="flex items-center gap-x-2">
+                         <img src="{{asset('assets/about.png')}}"
+                              class="w-[2.5rem] h-[2.5rem] rounded-full border border-blue-500"
+                              alt="">
+                         <h2>
+                             {{$branch->ownerInfo?->branch[0]?->name}}</h2>
+                     </div>
+                     {{--                        <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>--}}
+                 </a>
+                   @endif
                 @empty
                     <h1 class="text-gray-400">No Chat Found!</h1>
                 @endforelse

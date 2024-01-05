@@ -100,8 +100,8 @@
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 md:gap-6">
-        <div class="relative z-40 w-full mb-6 group" id="datepicker">
+      <div class="grid grid-cols-1 md:gap-6">
+        <!-- <div class="relative z-40 w-full mb-6 group" id="datepicker">
           <VueDatePicker
             required
             placeholder="Select Date"
@@ -110,6 +110,7 @@
             auto-apply
             class="block px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             :disabled-week-days="[6, 0]"
+            :enable-time-picker="false"
             v-model="data.date"
           ></VueDatePicker>
           <label
@@ -117,9 +118,31 @@
             class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Date</label
           >
+        </div> -->
+        <div class="relative z-0 w-full mb-6 group">
+          <select
+            required
+            v-model="data.time"
+            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+          >
+            <option value="" :selected="true">Choose time...</option>
+            <option
+              v-for="time in alltimes"
+              :key="time"
+              :value="time.time"
+              class="bg-gray-700"
+              :disabled="time.status"
+            >
+              {{ time.time }}
+            </option>
+          </select>
+          <label
+            for="lastname"
+            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Time</label
+          >
         </div>
-
-        <div class="relative z-40 w-full mb-6 group">
+        <!-- <div class="relative z-40 w-full mb-6 group">
           <VueDatePicker
             required
             placeholder="Select Time"
@@ -128,6 +151,7 @@
             :min-time="minTime"
             :max-time="maxTime"
             :start-time="startTime"
+            :enable-minutes="false"
             class="block px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             v-model="data.time"
             :is-24="true"
@@ -137,7 +161,7 @@
             class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Time</label
           >
-        </div>
+        </div> -->
       </div>
     </div>
     <button
@@ -155,11 +179,12 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { ref, onMounted, reactive, watch } from "vue";
 import axios from "axios";
+import { times } from "lodash";
 
 const date = ref("");
 const time = ref("");
 const loading = ref(false);
-const props = defineProps(["data", "user"]);
+const props = defineProps(["data", "user", "date"]);
 const information = ref([]);
 const startTime = ref({ hours: 0, minutes: 0 });
 const data = reactive({
@@ -172,7 +197,7 @@ const data = reactive({
   post_id: "",
   branch_id: "",
 });
-
+const alltimes = ref([]);
 const minTime = reactive({
   hours: 0,
   minutes: 0,
@@ -188,13 +213,18 @@ onMounted(() => {
   const newData = JSON.parse(props.data);
   const newUser = JSON.parse(props.user);
   information.value = newData;
-
+  fetchTime(
+    newData?.branch?.id,
+    `${props.date.split("-")[0]}/${props.date.split("-")[1]}/${props.date.split("-")[2]}`
+  );
   data.post_id = newData?.id;
   data.branch_id = newData?.branch?.id;
   data.firstname = newUser?.firstname;
-  data.lastname = newUser?.lastname;
+  data.lastname = newUser?.lastname == " " ? "" : newUser?.lastname;
   data.email = newUser?.email;
-
+  data.date = `${props.date.split("-")[0]}/${props.date.split("-")[1]}/${
+    props.date.split("-")[2]
+  }`;
   minTime.hours = newData.branch?.start_time.split(":")[0];
   minTime.minutes = newData.branch?.start_time.split(":")[1];
   maxTime.hours = newData.branch?.end_time.split(":")[0];
@@ -215,6 +245,11 @@ const store = async () => {
     console.log(err.response);
     error.value = err.response.data.errors;
   }
+};
+
+const fetchTime = async (branchId, newDate) => {
+  const { data } = await axios.post("/branch/time/" + branchId, { date: newDate });
+  alltimes.value = data;
 };
 </script>
 

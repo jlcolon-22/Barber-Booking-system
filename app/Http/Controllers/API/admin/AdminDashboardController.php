@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\admin;
 
+use App\Models\BranchTime;
 use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
@@ -51,7 +52,7 @@ class AdminDashboardController extends Controller
 
             if($checkDate == 0)
             {
-                $resev = Carbon::parse($value->time);
+                $resev = Carbon::parse(explode(' to ',$value->time)[1]);
 
                 $checkTime = $resev->diffInMinutes($now,false);
 
@@ -111,7 +112,7 @@ class AdminDashboardController extends Controller
 
             if($checkDate == 0)
             {
-                $resev = Carbon::parse($value->time);
+                $resev = Carbon::parse(explode(' to ',$value->time)[1]);
 
                 $checkTime = $resev->diffInMinutes($now,false);
 
@@ -225,7 +226,27 @@ class AdminDashboardController extends Controller
             'end_time'=>$request->end_time,
             'lat_long'=>$request->lat_long,
         ]);
+        // $start = Carbon::parse($request->start_time);
+        // $end = Carbon::parse($request->end_time)->subHours(1);
 
+        // if( $start->diffInHours($end) % 2 != 0)
+        // {
+
+        //     $end = Carbon::parse($request->end_time)->subHour();
+
+        // }
+        // $currentDateTime = $start->copy();
+
+        // while ($currentDateTime <= $end) {
+        //     $nextDateTime = $currentDateTime->copy()->addHour();
+
+        //     $x = $currentDateTime->format('h:ia') . ' to ' . $nextDateTime->format('h:ia');
+        //     BranchTime::create([
+        //         'branch_id'=>$branch->id,
+        //         'time'=>$x
+        //     ]);
+        //     $currentDateTime = $nextDateTime;
+        // }
         if($branch)
         {
              $filename = time().'-branch.'.$request->photo->extension();
@@ -248,6 +269,28 @@ class AdminDashboardController extends Controller
             'end_time'=>$request->end_time,
             'lat_long'=>$request->lat_long,
         ]);
+        // BranchTime::where('branch_id',$id->id)->delete();
+        // $start = Carbon::parse($request->start_time);
+        // $end = Carbon::parse($request->end_time)->subHours(1);
+
+        // if( $start->diffInHours($end) % 2 != 0)
+        // {
+
+        //     $end = Carbon::parse($request->end_time)->subHour();
+
+        // }
+        // $currentDateTime = $start->copy();
+
+        // while ($currentDateTime <= $end) {
+        //     $nextDateTime = $currentDateTime->copy()->addHour();
+
+        //     $x = $currentDateTime->format('h:ia') . ' to ' . $nextDateTime->format('h:ia');
+        //     BranchTime::create([
+        //         'branch_id'=>$id->id,
+        //         'time'=>$x
+        //     ]);
+        //     $currentDateTime = $nextDateTime;
+        // }
 
           if(!!$request->photo)
         {

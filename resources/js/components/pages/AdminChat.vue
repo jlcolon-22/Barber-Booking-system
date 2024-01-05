@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-4 right-4">
+  <div class="fixed bottom-7 right-4">
     <main class="relative">
       <div class="">
         <button v-if="!!user_id" @click="showChat" class="bg-blue-500 p-3 rounded-full">
@@ -44,20 +44,31 @@
 </template>
 <script setup>
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeMount } from "vue";
 const props = defineProps(["user_id"]);
 const bottom = ref(null);
 const toggleChat = ref(false);
 const body = ref("");
 const messages = ref([]);
+const channel = ref(null);
 const showChat = async () => {
   toggleChat.value = await !toggleChat.value;
   setTimeout(() => {
     bottom.value.scrollIntoView();
   }, 500);
 };
+
+const x = () => {
+  console.log("ss");
+  Echo.listen("ChatMessage", (e) => {
+    messages.value.push(e.data);
+    console.log(e);
+  });
+};
 const store = async () => {
   const { data } = await axios.post("/admins/message", { body: body.value });
+  //   await x();
+
   await messages.value.push(data);
   bottom.value.scrollIntoView();
   body.value = "";
@@ -66,9 +77,12 @@ const fetch = async () => {
   const { data } = await axios.get("/admins/message");
   messages.value = await data;
 };
-onMounted(async () => {
-  if (!!props.user_id) {
-    fetch();
-  }
-});
+onBeforeMount(() => {}),
+  onMounted(() => {
+    Echo.channel(`chat`);
+    // channel.value = window.Echo.channel(`chat`);
+    if (!!props.user_id) {
+      fetch();
+    }
+  });
 </script>
