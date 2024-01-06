@@ -119,6 +119,32 @@
             >Date</label
           >
         </div> -->
+
+        <div class="relative z-0 w-full mb-6 group">
+          <DatePicker
+            v-model="date"
+            expanded
+            :disabled-dates="disabledDates"
+            :min-date="new Date()"
+            :masks="masks"
+            required
+          >
+            <template #default="{ inputValue, inputEvents }">
+              <input
+                placeholder=" "
+                :value="inputValue"
+                v-on="inputEvents"
+                required
+                class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+              />
+            </template>
+          </DatePicker>
+          <label
+            for="lastname"
+            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Date</label
+          >
+        </div>
         <div class="relative z-0 w-full mb-6 group">
           <select
             required
@@ -142,6 +168,7 @@
             >Time</label
           >
         </div>
+
         <!-- <div class="relative z-40 w-full mb-6 group">
           <VueDatePicker
             required
@@ -213,22 +240,24 @@ onMounted(() => {
   const newData = JSON.parse(props.data);
   const newUser = JSON.parse(props.user);
   information.value = newData;
-  fetchTime(
-    newData?.branch?.id,
-    `${props.date.split("-")[0]}/${props.date.split("-")[1]}/${props.date.split("-")[2]}`
-  );
+  //   fetchTime(
+  //     newData?.branch?.id,
+  //     `${props.date.split("-")[0]}/${props.date.split("-")[1]}/${props.date.split("-")[2]}`
+  //   );
   data.post_id = newData?.id;
   data.branch_id = newData?.branch?.id;
   data.firstname = newUser?.firstname;
   data.lastname = newUser?.lastname == " " ? "" : newUser?.lastname;
   data.email = newUser?.email;
-  data.date = `${props.date.split("-")[0]}/${props.date.split("-")[1]}/${
-    props.date.split("-")[2]
-  }`;
+  //   data.date = `${props.date.split("-")[0]}/${props.date.split("-")[1]}/${
+  //     props.date.split("-")[2]
+  //   }`;
   minTime.hours = newData.branch?.start_time.split(":")[0];
   minTime.minutes = newData.branch?.start_time.split(":")[1];
   maxTime.hours = newData.branch?.end_time.split(":")[0];
   maxTime.minutes = newData.branch?.end_time.split(":")[1];
+
+  getBranchDate(newData?.branch?.id);
 });
 
 const store = async () => {
@@ -247,6 +276,40 @@ const store = async () => {
   }
 };
 
+// date picker
+import { DatePicker } from "v-calendar";
+import "v-calendar/style.css";
+
+const disabledDates = ref([
+  { start: new Date(2024, 0, 7), end: new Date(2024, 0, 7) },
+  { start: new Date(2024, 0, 19), end: new Date(2024, 0, 19) },
+]);
+watch(date, (n, o) => {
+  //   calendar.value = false;
+  var inputDate = new Date(n);
+
+  const fulldate = `${
+    inputDate.getMonth() + 1
+  }/${inputDate.getDate()}/${inputDate.getFullYear()}`;
+  data.date = fulldate;
+  fetchTime(data.branch_id, fulldate);
+});
+const getBranchDate = async (branch_id) => {
+  const { data } = await axios.post("/services/branch/" + branch_id);
+
+  disabledDates.value = data.map((value, index) => {
+    return { start: value, end: value };
+  });
+  //   console.log(data);
+};
+// const openCalendar = (urls, id) => {
+//   calendar.value = !calendar.value;
+//   getBranchDate(id);
+//   url.value = urls;
+// };
+// const closeCalendar = () => {
+//   calendar.value = !calendar.value;
+// };
 const fetchTime = async (branchId, newDate) => {
   const { data } = await axios.post("/branch/time/" + branchId, { date: newDate });
   alltimes.value = data;

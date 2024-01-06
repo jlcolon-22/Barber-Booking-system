@@ -8,17 +8,17 @@
       />
       <div class="p-2 grid">
         <div class="text-2xl text-black font-semibold">{{ branch.name }}</div>
-        <!-- <a
+        <a
           :href="`/view?branch=${branch.name}&q=${branch.id}`"
           class="bg-blue-500 text-center py-2"
           >view</a
-        > -->
-        <input
+        >
+        <!-- <input
           @click="openCalendar(`/view?branch=${branch.name}&q=${branch.id}`, branch.id)"
           type="button"
           value="view"
           class="bg-blue-500 text-center py-2"
-        />
+        /> -->
       </div>
     </div>
   </div>
@@ -79,9 +79,7 @@ watch(date, (n, o) => {
 const getBranchDate = async (branch_id) => {
   const { data } = await axios.post("/services/branch/" + branch_id);
   disabledDates.value = data.map((value, index) => {
-
     return { start: value, end: value };
-
   });
   //   console.log(data);
 };

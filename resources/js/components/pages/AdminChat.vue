@@ -66,6 +66,14 @@ const x = () => {
       setTimeout(() => {
         bottom.value.scrollIntoView();
       }, 500);
+      return;
+    } else if (e.data.sender_id == props.user_id);
+    {
+      messages.value.push(e.data);
+      setTimeout(() => {
+        bottom.value.scrollIntoView();
+      }, 500);
+      return;
     }
   });
 };

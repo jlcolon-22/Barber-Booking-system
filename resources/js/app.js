@@ -46,5 +46,8 @@ app.component('post_owner', PostOwner);
 app.component('post_edit_owner', PostEditOwner);
 app.component('chat_owner', ChatOwner);
 
+
+
+
 app.use(print)
 app.mount('#app');

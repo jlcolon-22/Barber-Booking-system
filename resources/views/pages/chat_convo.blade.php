@@ -8,11 +8,14 @@
         <div class="grid grid-cols-1 lg:w-2/5 px-10  mx-auto py-10 bg-black bg-opacity-90">
             <div class="flex justify-between items-center pb-10 ">
                 <h1 class="font-bold">Chats</h1>
-                <a href="/message" class="px-4 py-2 bg-blue-500 text-sm rounded">Back</a>
+                <div class="flex gap-x-2">
+                    <a href="/view?branch={{ $branch->ownerInfo?->branch[0]?->name  }}&q={{ $branch->ownerInfo?->branch[0]?->id }}" class="px-4 py-2 bg-blue-500 text-sm rounded">Go to {{ $branch->ownerInfo?->branch[0]->name }}</a>
+                    <a href="/message" class="px-4 py-2 bg-blue-500 text-sm rounded">Back</a>
+                </div>
             </div>
 
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-2">
-                <a href="/message/convo/{{$branch->id}}"
+                <a type="button" role="button"
                    class="bg-gray-600 flex items-center justify-between px-3 py-2 rounded">
                     <div class="flex items-center gap-x-2">
                         <img src="{{asset('assets/about.png')}}"
