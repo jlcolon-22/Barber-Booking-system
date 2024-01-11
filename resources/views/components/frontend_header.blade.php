@@ -35,7 +35,7 @@
         @if (Auth::check())
             <div class="relative">
                 <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
-                    class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 relative"
+                    class="flex mx-3 text-base bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 relative"
                     type="button">
                     <span class="sr-only">Open user menu</span>
                     @if (!!Auth::user()->profile)
@@ -49,11 +49,11 @@
                     <!-- Dropdown menu -->
                     <div id="dropdownAvatar"
                         class="z-10 hidden bg-white divide-y divide-gray-100 absolute top-10 left-auto right-0 w-44 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
-                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                        <div class="px-4 py-3 text-base text-gray-900 dark:text-white">
                             <div>{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</div>
 
                         </div>
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                        <ul class="py-2 text-base text-gray-700 dark:text-gray-200"
                             aria-labelledby="dropdownUserAvatarButton">
                             <li>
                                 <a href="/account"
@@ -68,7 +68,7 @@
                         </ul>
                         <div class="py-2">
                             <a type="button" onclick="window.location.href = '/auth/logout'"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
                                 out</a>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
         <div class="flex items-center md:order-2">
             @if (Auth::check())
                 <button type="button" onclick="showDropdown()"
-                        class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-600"
+                        class="flex mr-3 text-base bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-600"
                         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                         data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
@@ -107,7 +107,7 @@
                 </button>
             @else
                 <a href="/auth/login"
-                   class="flex mr-3 text-sm bg-blue-500 px-5 py-2  rounded-full md:mr-0 focus:ring-4 focus:ring-gray-600"
+                   class="flex mr-3 text-base bg-blue-500 px-5 py-2  rounded-full md:mr-0 focus:ring-4 focus:ring-gray-600"
                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                    data-dropdown-placement="bottom">
                     Login
@@ -121,27 +121,27 @@
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a href="/account"
-                               class="block px-4 py-2 text-sm   hover:bg-gray-600 text-gray-200 hover:text-white">Account</a>
+                               class="block px-4 py-2 text-base   hover:bg-gray-600 text-gray-200 hover:text-white">Account</a>
                         </li>
                         <li>
                             <a href="/appointment"
-                               class="block px-4 py-2 text-sm   hover:bg-gray-600 text-gray-200 hover:text-white">Appointments</a>
+                               class="block px-4 py-2 text-base   hover:bg-gray-600 text-gray-200 hover:text-white">Appointments</a>
                         </li>
                         <li>
                             <a href="/message"
-                               class="block px-4 py-2 text-sm   hover:bg-gray-600 text-gray-200 hover:text-white">Message</a>
+                               class="block px-4 py-2 text-base   hover:bg-gray-600 text-gray-200 hover:text-white">Message</a>
                         </li>
 
                         <li>
                             <a href="/auth/logout"
-                               class="block px-4 py-2 text-sm   hover:bg-gray-600 text-gray-200 hover:text-white">Sign
+                               class="block px-4 py-2 text-base   hover:bg-gray-600 text-gray-200 hover:text-white">Sign
                                 out</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <button onclick="showList()" data-collapse-toggle="navbar-user" type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm  rounded-lg md:hidden  focus:outline-none focus:ring-2  text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-base  rounded-lg md:hidden  focus:outline-none focus:ring-2  text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
                     aria-controls="navbar-user" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"

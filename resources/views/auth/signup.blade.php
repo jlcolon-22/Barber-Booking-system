@@ -17,24 +17,24 @@
                 <form action="/auth/signup" method="post" class="space-y-6" action="#" method="POST">
                     @csrf
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-50">Firstname</label>
+                        <label for="email" class="block text-base font-medium leading-6 text-gray-50">Firstname</label>
                         <div class="mt-2">
                             <input id="firstname" name="firstname" type="text" autocomplete="firstname" required
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6">
                         </div>
                     </div>
                     <div>
-                        <label for="lastname" class="block text-sm font-medium leading-6 text-gray-50">Lastname</label>
+                        <label for="lastname" class="block text-base font-medium leading-6 text-gray-50">Lastname</label>
                         <div class="mt-2">
                             <input id="lastname" name="lastname" type="text" autocomplete="lastname" required
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6">
                         </div>
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-50">Email address</label>
+                        <label for="email" class="block text-base font-medium leading-6 text-gray-50">Email address</label>
                         <div class="mt-2">
                             <input type="text" id="email" name="email"  pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6">
                         </div>
                         @error('email')
 
@@ -45,12 +45,12 @@
 
                     <div>
                         <div class="flex items-center justify-between">
-                            <label for="password" class="block text-sm font-medium leading-6 text-gray-50">Password</label>
+                            <label for="password" class="block text-base font-medium leading-6 text-gray-50">Password</label>
 
                         </div>
                         <div class="mt-2">
                             <input id="password" name="password" type="password" autocomplete="current-password" required
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2">
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6 px-2">
                         </div>
                           @error('password')
 
@@ -61,24 +61,24 @@
 
                     <div>
                         <button type="submit"
-                            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
+                            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
                             in</button>
                     </div>
                 </form>
                 <div class="flex  items-center gap-x-7 my-7 ">
                     <hr class="opacity-50 w-[10rem]" />
-                     <span class="text-sm opacity-50 text-center w-fit">or</span>
+                     <span class="text-base opacity-50 text-center w-fit">or</span>
                     <hr  class="opacity-50  w-[10rem]" >
                 </div>
                 <div class=" grid gap-y-2">
                     <a href="/auth/google"
-                    class="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600  items-center gap-x-2">
+                    class="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600  items-center gap-x-2">
                     <img src="/icons/google.svg" loading="lazy" class="w-[1rem]" alt="">
                     Sign Up with Google
                 </a>
 
                 </div>
-                <p class="mt-10 text-center text-sm text-gray-500">
+                <p class="mt-10 text-center text-base text-gray-500">
                     Already have an account?
                     <a href="/auth/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Sign In</a>
                 </p>

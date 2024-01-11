@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 class AdminDashboardController extends Controller
 {
 
@@ -59,7 +59,19 @@ class AdminDashboardController extends Controller
 
                 if($checkTime >= 0)
                 {
-                    $value->update(['status'=>3]);
+                    if($value->status == 1 )
+                    {
+                        $value->update(['status'=>3]);
+                        $data = [
+                            'name' => $value->firstname.' '.$value->lastname,
+                            'email' => $value->email,
+                            'date'=>$value->date,
+                            'time'=>$value->time,
+                            'number'=>$value->number,
+                            'message'=>'Your reservation is finished.'
+                        ];
+                        Mail::to($value->email)->send(new \App\Mail\Reservation($data));
+                    }
                 }
 
 
@@ -120,7 +132,19 @@ class AdminDashboardController extends Controller
 
                 if($checkTime >= 0)
                 {
-                    $value->update(['status'=>3]);
+                    if($value->status == 1 )
+                    {
+                        $value->update(['status'=>3]);
+                        $data = [
+                            'name' => $value->firstname.' '.$value->lastname,
+                            'email' => $value->email,
+                            'date'=>$value->date,
+                            'time'=>$value->time,
+                            'number'=>$value->number,
+                            'message'=>'Your reservation is finished.'
+                        ];
+                        Mail::to($value->email)->send(new \App\Mail\Reservation($data));
+                    }
                 }
 
 
@@ -132,7 +156,7 @@ class AdminDashboardController extends Controller
 
         }
         $branches =  Branch::orderBy('name','asc')->get();
-       if(!!$request->branch && $request->branch != 'all')
+        if(!!$request->branch && $request->branch != 'all')
         {
             $branch = Branch::where('name','LIKE', '%'.$request->branch.'%')->first();
             $posts = Post::query()->with('employeeInfo','branch')->where('owner_id',$branch->owner_id)->latest()->paginate(10);
@@ -166,7 +190,7 @@ class AdminDashboardController extends Controller
     }
     public function store_account(Request $request)
     {
-           $request->validate([
+        $request->validate([
             'password' => 'required|min:8',
             'email' => 'required|email|unique:users',
 
@@ -251,17 +275,17 @@ class AdminDashboardController extends Controller
         // }
         if($branch)
         {
-             $filename = time().'-branch.'.$request->photo->extension();
-             $branch->update([
+            $filename = time().'-branch.'.$request->photo->extension();
+            $branch->update([
                 'photo'=>'/storage/branch/'.$filename
-             ]);
-             $request->photo->storeAs('public/branch',$filename);
+            ]);
+            $request->photo->storeAs('public/branch',$filename);
         }
     }
     public function update_branch(Request $request, Branch $id)
     {
         $id->update([
-           'name'=>$request->name,
+            'name'=>$request->name,
             'number'=>$request->number,
             'location'=>$request->location,
             'email'=>$request->email,
@@ -294,18 +318,18 @@ class AdminDashboardController extends Controller
         //     $currentDateTime = $nextDateTime;
         // }
 
-          if(!!$request->photo)
+        if(!!$request->photo)
         {
-             $filename = time().'-branch.'.$request->photo->extension();
-             if(!!$id->photo)
-             {
+            $filename = time().'-branch.'.$request->photo->extension();
+            if(!!$id->photo)
+            {
                 unlink(substr($id->photo, 1));
 
-             }
-              $id->update([
+            }
+            $id->update([
                 'photo'=>'/storage/branch/'.$filename
-             ]);
-             $request->photo->storeAs('public/branch',$filename);
+            ]);
+            $request->photo->storeAs('public/branch',$filename);
         }
     }
     public function delete_branch(Branch $id)

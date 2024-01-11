@@ -79,6 +79,7 @@ class OwnerController extends Controller
             'email' => $id->email,
             'date' => $id->date,
             'time' => $id->time,
+            'number' => $id->number,
             'message' => 'Your request has been approved.'
         ];
         Mail::to($id->email)->send(new \App\Mail\Reservation($data));
@@ -88,6 +89,7 @@ class OwnerController extends Controller
             'email' => $id->email,
             'date' => $id->date,
             'time' => $id->time,
+            'number' => $id->number,
             'message' => $id->firstname . ' ' . $id->lastname . " reservation request has been approved."
         ];
         Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
@@ -111,6 +113,7 @@ class OwnerController extends Controller
             'email' => $id->email,
             'date' => $id->date,
             'time' => $id->time,
+            'number' => $id->number,
             'message' => 'Your request has been canceled.'
         ];
         Mail::to($id->email)->send(new \App\Mail\Reservation($data));
@@ -120,6 +123,7 @@ class OwnerController extends Controller
             'email' => $id->email,
             'date' => $id->date,
             'time' => $id->time,
+            'number' => $id->number,
             'message' => $id->firstname . ' ' . $id->lastname . " reservation request has been canceled."
         ];
         Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
@@ -186,7 +190,20 @@ class OwnerController extends Controller
 
                 if($checkTime >= 0)
                 {
-                    $value->update(['status'=>3]);
+                    if($value->status == 1 )
+                    {
+                        $value->update(['status'=>3]);
+                        $data = [
+                            'name' => $value->firstname.' '.$value->lastname,
+                            'email' => $value->email,
+                            'date'=>$value->date,
+                            'time'=>$value->time,
+                            'number'=>$value->number,
+                            'message'=>'Your reservation is finished.'
+                        ];
+                        Mail::to($value->email)->send(new \App\Mail\Reservation($data));
+                    }
+                    Mail::to($value->email)->send(new \App\Mail\Reservation($data));
                 }
 
 

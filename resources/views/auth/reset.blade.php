@@ -16,7 +16,7 @@
             <div class="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
                 <form class="space-y-6" action="/auth/password/reset/{{$id}}" method="POST">
                    @if (session()->has('success'))
-                   <div class="flex items-center p-4 mb-4 text-sm  rounded-lg  bg-gray-800 text-green-400" role="alert">
+                   <div class="flex items-center p-4 mb-4 text-base  rounded-lg  bg-gray-800 text-green-400" role="alert">
                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                     </svg>
@@ -26,26 +26,26 @@
                     </div>
                   </div>
                    @endif
-                 
+
                     @csrf
                     <div>
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-50">Password</label>
+                        <label for="password" class="block text-base font-medium leading-6 text-gray-50">Password</label>
                         <div class="mt-2">
                             <input id="password"  name="password" type="password" autocomplete="password" required
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6">
                         </div>
                     </div>
 
 
                     <div>
                         <button type="submit"
-                            class="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Change password
+                            class="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Change password
                             </button>
                     </div>
                 </form>
-              
-              
-           
+
+
+
             </div>
         </div>
     </main>

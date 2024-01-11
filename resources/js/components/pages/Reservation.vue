@@ -5,7 +5,7 @@
   >
     <h1 class="pb-10 font-bold">Book Information</h1>
     <!--    @if(session()->has('success'))
-            <div class="p-4 mb-10 text-sm rounded-lg  bg-gray-800 text-green-400" role="alert">
+            <div class="p-4 mb-10 text-base rounded-lg  bg-gray-800 text-green-400" role="alert">
               <span class="font-medium">Updated Successfully!</span>
           </div>
           @endif
@@ -40,14 +40,14 @@
             type="text"
             name="floating_first_name"
             id="floating_first_name"
-            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+            class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             placeholder=" "
             required
             v-model="data.firstname"
           />
           <label
             for="floating_first_name"
-            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >First name</label
           >
         </div>
@@ -56,14 +56,14 @@
             type="text"
             name="lastname"
             id="lastname"
-            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+            class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             placeholder=" "
             required
             v-model="data.lastname"
           />
           <label
             for="lastname"
-            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Last name</label
           >
         </div>
@@ -72,28 +72,29 @@
         <div class="relative z-0 w-full mb-6 group">
           <input
             type="text"
-            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+            class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             placeholder=" "
             required
             v-model="data.email"
+            :disabled="true"
           />
           <label
             for="floating_first_name"
-            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Email</label
           >
         </div>
         <div class="relative z-0 w-full mb-6 group">
           <input
             type="tel"
-            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+            class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             placeholder=" "
             required
             v-model="data.number"
           />
           <label
             for="lastname"
-            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Number (ex: 09101421431)</label
           >
           <small class="text-red-500" v-if="error.number">{{ error?.number[0] }}</small>
@@ -108,14 +109,14 @@
             :min-date="new Date()"
             :hide-navigation="['time', 'year']"
             auto-apply
-            class="block px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+            class="block px-0 w-full text-base bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             :disabled-week-days="[6, 0]"
             :enable-time-picker="false"
             v-model="data.date"
           ></VueDatePicker>
           <label
             for="floating_first_name"
-            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Date</label
           >
         </div> -->
@@ -135,13 +136,13 @@
                 :value="inputValue"
                 v-on="inputEvents"
                 required
-                class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+                class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
               />
             </template>
           </DatePicker>
           <label
             for="lastname"
-            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Date</label
           >
         </div>
@@ -149,14 +150,14 @@
           <select
             required
             v-model="data.time"
-            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+            class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
           >
-            <option value="" :selected="true">Choose time...</option>
+            <option value="" class="bg-gray-700" :selected="true">Choose time...</option>
             <option
               v-for="time in alltimes"
               :key="time"
               :value="time.time"
-              class="bg-gray-700"
+              :class="time.status ? 'bg-gray-700 text-red-400' : 'bg-gray-700' "
               :disabled="time.status"
             >
               {{ time.time }}
@@ -164,7 +165,7 @@
           </select>
           <label
             for="lastname"
-            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Time</label
           >
         </div>
@@ -179,13 +180,13 @@
             :max-time="maxTime"
             :start-time="startTime"
             :enable-minutes="false"
-            class="block px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
+            class="block px-0 w-full text-base bg-transparent border-0 border-b-2 ppearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             v-model="data.time"
             :is-24="true"
           ></VueDatePicker>
           <label
             for="floating_first_name"
-            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >Time</label
           >
         </div> -->
@@ -194,9 +195,9 @@
     <button
       data-modal-hide="default-modal"
       type="submit"
-      class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-green-600 hover:bg-green-700 focus:ring-green-800"
+      class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-5 py-2.5 text-center bg-green-600 hover:bg-green-700 focus:ring-green-800"
     >
-      {{ loading ? "Loading..." : "Update" }}
+      {{ loading ? "Loading..." : "Book Now" }}
     </button>
   </form>
 </template>
@@ -204,10 +205,10 @@
 <script setup>
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { ref, onMounted, reactive, watch } from "vue";
+import { ref, onMounted, reactive, watch ,inject} from "vue";
 import axios from "axios";
 import { times } from "lodash";
-
+const Swal = inject('$swal');
 const date = ref("");
 const time = ref("");
 const loading = ref(false);
@@ -237,6 +238,7 @@ const maxTime = reactive({
 });
 const error = ref([]);
 onMounted(() => {
+
   const newData = JSON.parse(props.data);
   const newUser = JSON.parse(props.user);
   information.value = newData;
@@ -268,7 +270,12 @@ const store = async () => {
       alert("All slots are already taken for the day you selected");
     }
     loading.value = false;
-    window.location.href = "/booked";
+    date.value = '';
+    data.time = '';
+      alltimes.value = [];
+
+    // window.location.href = "/booked";
+      Swal.fire('The reservation has been booked!')
   } catch (err) {
     loading.value = false;
     console.log(err.response);
@@ -286,13 +293,16 @@ const disabledDates = ref([
 ]);
 watch(date, (n, o) => {
   //   calendar.value = false;
-  var inputDate = new Date(n);
+  if(!!n)
+  {
+      var inputDate = new Date(n);
 
-  const fulldate = `${
-    inputDate.getMonth() + 1
-  }/${inputDate.getDate()}/${inputDate.getFullYear()}`;
-  data.date = fulldate;
-  fetchTime(data.branch_id, fulldate);
+      const fulldate = `${
+          inputDate.getMonth() + 1
+      }/${inputDate.getDate()}/${inputDate.getFullYear()}`;
+      data.date = fulldate;
+      fetchTime(data.branch_id, fulldate);
+  }
 });
 const getBranchDate = async (branch_id) => {
   const { data } = await axios.post("/services/branch/" + branch_id);

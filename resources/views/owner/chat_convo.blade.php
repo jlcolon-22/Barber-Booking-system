@@ -11,7 +11,7 @@
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
                         <a href="/owner/dashboard"
-                           class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white">
+                           class="inline-flex items-center text-base font-medium text-gray-400 hover:text-white">
                             <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  fill="currentColor" viewBox="0 0 20 20">
                                 <path
@@ -29,7 +29,7 @@
                 <div class="grid grid-cols-1 px-5 md:px-10  mx-auto py-10 bg-gray-900  ">
                     <div class="flex justify-between items-center pb-10 ">
                         <h1 class="font-bold">Chats</h1>
-                        <a href="/owner/message" class="px-4 py-2 bg-blue-500 text-sm rounded">Back</a>
+                        <a href="/owner/message" class="px-4 py-2 bg-blue-500 text-base rounded">Back</a>
                     </div>
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-2">

@@ -64,10 +64,10 @@ class FrontendController extends Controller
             $bol = true;
             foreach($value as $x)
             {
-               if($x->status == 0)
-               {
+                if($x->status == 0)
+                {
                     $bol = false;
-               }
+                }
             }
             if($bol)
             {
@@ -100,7 +100,7 @@ class FrontendController extends Controller
 
             if ($check) {
                 $messages = Message::query()->where('conversation_id',$check->id)->get();
-                 return response()->json($messages);
+                return response()->json($messages);
             } else {
                 $messages = [];
 
@@ -130,23 +130,23 @@ class FrontendController extends Controller
                 'sender_id' => Auth::id()
             ])->toArray();
             broadcast(new ChatMessage($message))->toOthers();
-             return response()->json($message['conversation_id']);
+            return response()->json($message['conversation_id']);
 
         } else {
             $convo = Conversation::query()
-            ->create([
-                'id' => Str::uuid(),
-                'user_one' => Auth::id(),
-                'user_two' => $user->id,
-                'type'=>1
-            ]);
+                ->create([
+                    'id' => Str::uuid(),
+                    'user_one' => Auth::id(),
+                    'user_two' => $user->id,
+                    'type'=>1
+                ]);
             $message = Message::query()->create([
-                        'conversation_id' => $convo->id,
-                        'body' => $request->body,
-                        'sender_id' => Auth::id()
-                    ]);
-                    broadcast(new ChatMessage($message))->toOthers();
-                    return response()->json($convo->id);
+                'conversation_id' => $convo->id,
+                'body' => $request->body,
+                'sender_id' => Auth::id()
+            ]);
+            broadcast(new ChatMessage($message))->toOthers();
+            return response()->json($convo->id);
 
         }
 
@@ -285,7 +285,7 @@ class FrontendController extends Controller
             'date' => $request->date,
             'time' => $request->time,
             'number' => $request->number,
-            'message' => 'You have successfully submitted the reservation request. Please wait for us to approve your reservation.'
+            'message' => 'you have successfully reservation.'
         ];
         Mail::to($request->email)->send(new \App\Mail\Reservation($data));
         $owners = User::where('owner_id', $branch->owner_id)->latest()->get();
@@ -295,7 +295,7 @@ class FrontendController extends Controller
             'date' => $request->date,
             'time' => $request->time,
             'number' => $request->number,
-            'message' => $request->firstname . ' ' . $request->lastname . ' submitted a reservation request.'
+            'message' => 'you have successfully reservation.'
         ];
         Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 
@@ -324,7 +324,19 @@ class FrontendController extends Controller
 
                 if($checkTime >= 0)
                 {
-                    $value->update(['status'=>3]);
+                    if($value->status == 1 )
+                    {
+                        $value->update(['status'=>3]);
+                        $data = [
+                            'name' => $value->firstname.' '.$value->lastname,
+                            'email' => $value->email,
+                            'date'=>$value->date,
+                            'time'=>$value->time,
+                            'number'=>$value->number,
+                            'message'=>'Your reservation is finished.'
+                        ];
+                        Mail::to($value->email)->send(new \App\Mail\Reservation($data));
+                    }
                 }
 
 
@@ -352,8 +364,11 @@ class FrontendController extends Controller
             'email' => $id->email,
             'date' => $id->date,
             'time' => $id->time,
+            'number' => $id->number,
             'message' => 'Your cancellation of the reservation request was successful.'
         ];
+        $x = BranchTime::where('branch_id', $id->branch_id)->where('time',$id->time)->whereDate('date',Carbon::parse($id->date)->format('d/m/Y'))->update(['status'=>0]);
+
         Mail::to($id->email)->send(new \App\Mail\Reservation($data));
         $owners = User::where('owner_id', $branch->owner_id)->latest()->get();
         $owner = [
@@ -361,6 +376,7 @@ class FrontendController extends Controller
             'email' => $id->email,
             'date' => $id->date,
             'time' => $id->time,
+            'number' => $id->number,
             'message' => $id->firstname . ' ' . $id->lastname . " canceled the reservation request."
         ];
         Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));

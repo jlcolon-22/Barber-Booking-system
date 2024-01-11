@@ -16,7 +16,7 @@
           <button
             @click="mapToggle = !mapToggle"
             type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-base w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             data-modal-hide="default-modal"
           >
             <svg
@@ -69,7 +69,7 @@
 
   <a
     @click="mapToggle = !mapToggle"
-    class="bg-blue-600 p-2 rounded text-sm text-white underline"
+    class="bg-blue-600 p-2 rounded text-base text-white underline"
     >view map</a
   >
 </template>

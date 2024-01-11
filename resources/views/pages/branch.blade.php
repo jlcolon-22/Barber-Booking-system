@@ -34,21 +34,21 @@
                                 class="text-gray-400 font-light">
                                 (owner)</span>
                         </p>
-                        <p class="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start">
+                        <p class="pt-2 text-gray-600 text-xs lg:text-base flex items-center justify-center lg:justify-start">
                             <svg class="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 20 20">
                                 <path
                                     d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm7.75-8a8.01 8.01 0 0 0 0-4h-3.82a28.81 28.81 0 0 1 0 4h3.82zm-.82 2h-3.22a14.44 14.44 0 0 1-.95 3.51A8.03 8.03 0 0 0 16.93 14zm-8.85-2h3.84a24.61 24.61 0 0 0 0-4H8.08a24.61 24.61 0 0 0 0 4zm.25 2c.41 2.4 1.13 4 1.67 4s1.26-1.6 1.67-4H8.33zm-6.08-2h3.82a28.81 28.81 0 0 1 0-4H2.25a8.01 8.01 0 0 0 0 4zm.82 2a8.03 8.03 0 0 0 4.17 3.51c-.42-.96-.74-2.16-.95-3.51H3.07zm13.86-8a8.03 8.03 0 0 0-4.17-3.51c.42.96.74 2.16.95 3.51h3.22zm-8.6 0h3.34c-.41-2.4-1.13-4-1.67-4S8.74 3.6 8.33 6zM3.07 6h3.22c.2-1.35.53-2.55.95-3.51A8.03 8.03 0 0 0 3.07 6z"/>
                             </svg> {{ $branch->location }}
                         </p>
-                        <p class="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start">
+                        <p class="pt-2 text-gray-600 text-xs lg:text-base flex items-center justify-center lg:justify-start">
                             <svg class="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 20 20">
                                 <path
                                     d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm7.75-8a8.01 8.01 0 0 0 0-4h-3.82a28.81 28.81 0 0 1 0 4h3.82zm-.82 2h-3.22a14.44 14.44 0 0 1-.95 3.51A8.03 8.03 0 0 0 16.93 14zm-8.85-2h3.84a24.61 24.61 0 0 0 0-4H8.08a24.61 24.61 0 0 0 0 4zm.25 2c.41 2.4 1.13 4 1.67 4s1.26-1.6 1.67-4H8.33zm-6.08-2h3.82a28.81 28.81 0 0 1 0-4H2.25a8.01 8.01 0 0 0 0 4zm.82 2a8.03 8.03 0 0 0 4.17 3.51c-.42-.96-.74-2.16-.95-3.51H3.07zm13.86-8a8.03 8.03 0 0 0-4.17-3.51c.42.96.74 2.16.95 3.51h3.22zm-8.6 0h3.34c-.41-2.4-1.13-4-1.67-4S8.74 3.6 8.33 6zM3.07 6h3.22c.2-1.35.53-2.55.95-3.51A8.03 8.03 0 0 0 3.07 6z"/>
                             </svg> {{ $branch->email }}
                         </p>
-                        <p class="py-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start">
+                        <p class="py-2 text-gray-600 text-xs lg:text-base flex items-center justify-center lg:justify-start">
                             <svg class="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 20 20">
                                 <path
@@ -57,14 +57,14 @@
                         </p>
 
 
-                        <a onclick="closeFeedback()" class="bg-yellow-500  p-2 rounded text-sm text-white underline mr-1">view feedback</a>
+                        <a onclick="closeFeedback()" class="bg-yellow-500  p-2 rounded text-base text-white underline mr-1">view feedback</a>
 
 
                         <map_branch locations="{{ $branch }}"></map_branch>
                       @auth
                       <form action="{{route('create_message',['branch_id'=>$branch->owner_id])}}" method="POST">
                         @csrf
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded text-sm">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded text-base">
                             Message
                         </button>
                     </form>
@@ -134,7 +134,7 @@
                                         class="text-3xl font-bold text-gray-900 dark:text-white">₱{{ $post->price }}</span>
                                     {{--  --}}
                                     <a href="/reservation?name={{ $post->name }}&q={{ $post->id }}&date={{ request()->get('date') }}"
-                                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Book</a>
+                                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Book</a>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                         Certificate
                     </h3>
                     <button onclick="closeModal()" type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-base w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             data-modal-hide="default-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                              viewBox="0 0 14 14">
@@ -193,7 +193,7 @@
                         Feedbacks
                     </h3>
                     <button onclick="closeFeedback()" type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-base w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             data-modal-hide="default-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                              viewBox="0 0 14 14">
@@ -216,7 +216,7 @@
                                 </div>
                             </div>
 
-                            <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400">
+                            <footer class="mb-5 text-base text-gray-500 dark:text-gray-400">
                                 <p>Date:
                                     <time
                                         datetime="{{$feedback->created_at}}">{{\Carbon\Carbon::parse($feedback->created_at)->toDateString()}}</time>
@@ -279,8 +279,9 @@
         const feedback = document.querySelector('#feedbackModal');
 
         function closeFeedback() {
-            feedback.classList.toggle('hidden')
 
+            feedback.classList.toggle('hidden')
+            feedback.classList.toggle('flex')
 
         }
         const branchMap = document.querySelector('#branchMap');

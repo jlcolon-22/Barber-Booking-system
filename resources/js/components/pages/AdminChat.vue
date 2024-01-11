@@ -2,14 +2,14 @@
   <div class="fixed bottom-7 right-4">
     <main class="relative">
       <div class="">
-        <button v-if="!!user_id" @click="showChat" class="bg-blue-500 p-3 rounded-full">
+        <button v-if="!!user_id" @click="showChat" class="bg-blue-500 p-3 text-lg rounded-full">
           Chat Us
         </button>
-        <a href="/auth/login" v-else class="bg-blue-500 p-3 rounded-full"> Chat Us </a>
+        <a href="/auth/login" v-else class="bg-blue-500 p-3 rounded-full text-lg "> Chat Us </a>
       </div>
       <div
         v-show="toggleChat"
-        class="absolute -top-[31.5rem] left-auto right-4 bg-white text-gray-900 w-[20rem] rounded"
+        class="absolute -top-[32.2rem] left-auto right-4 bg-white text-gray-900 w-[20rem] rounded border border-black"
       >
         <h1 class="px-2 py-3 border-b whitespace-nowrap text-center">Chat with Admin</h1>
 
@@ -36,7 +36,7 @@
             placeholder="Send Message..."
             class="w-full outline-none p-2 bg-gray-200 resize-none text-black min-h-[3rem]"
           ></textarea>
-          <button class="px-4 py-2 text-sm bg-blue-500 text-white">send</button>
+          <button class="px-4 py-2 text-base bg-blue-500 text-white">send</button>
         </form>
       </div>
     </main>

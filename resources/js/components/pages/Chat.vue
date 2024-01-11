@@ -21,7 +21,7 @@
       placeholder="Send Message..."
       class="w-full outline-none p-2 resize-none text-black"
     ></textarea>
-    <button class="px-4 py-2 text-sm bg-blue-500">send</button>
+    <button class="px-4 py-2 text-base bg-blue-500">send</button>
   </form>
 </template>
 <script setup>

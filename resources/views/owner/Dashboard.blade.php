@@ -11,7 +11,7 @@
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
                         <a href="/owner/dashboard"
-                           class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white">
+                           class="inline-flex items-center text-base font-medium text-gray-400 hover:text-white">
                             <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  fill="currentColor" viewBox="0 0 20 20">
                                 <path
@@ -30,7 +30,7 @@
 
 
                 @if(session()->has('success') )
-                    <div class="flex items-center p-4 mb-4 text-sm  rounded-lg bg-gray-800 text-green-400" role="alert">
+                    <div class="flex items-center p-4 mb-4 text-base  rounded-lg bg-gray-800 text-green-400" role="alert">
                         <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path
@@ -44,7 +44,7 @@
 
                 @endif
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left  text-gray-400">
+                    <table class="w-full text-base text-left  text-gray-400">
                         <thead class="text-xs  uppercase  bg-gray-700 text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">

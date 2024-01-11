@@ -47,7 +47,9 @@ app.component('post_edit_owner', PostEditOwner);
 app.component('chat_owner', ChatOwner);
 
 
-
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 app.use(print)
+app.use(VueSweetalert2)
 app.mount('#app');

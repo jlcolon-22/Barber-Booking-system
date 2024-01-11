@@ -11,7 +11,7 @@
      <ol class="inline-flex items-center space-x-1 md:space-x-3">
          <li class="inline-flex items-center">
              <a href="/owner/dashboard"
-             class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white">
+             class="inline-flex items-center text-base font-medium text-gray-400 hover:text-white">
              <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
              fill="currentColor" viewBox="0 0 20 20">
              <path
@@ -32,15 +32,15 @@
         <h1 class="pt-2 pb-10 font-bold text-2xl">Upload Certificate</h1>
 
         <div>
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-            <input class="block w-full text-sm py-2 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" name="photo" type="file">
+            <label class="block mb-2 text-base font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+            <input class="block w-full text-base py-2 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" name="photo" type="file">
 
         </div>
 
     <button
 data-modal-hide="default-modal"
 type="submit"
-class="mt-5 text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-green-600 hover:bg-green-700 focus:ring-green-800"
+class="mt-5 text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-5 py-2.5 text-center bg-green-600 hover:bg-green-700 focus:ring-green-800"
 >
 Upload
 </button>
@@ -51,7 +51,7 @@ Upload
         @forelse($certificates as $certificate)
 
  <div class="relative">
-             <button onclick="window.location.href = '/owner/certificate/delete/{{$certificate->id}}'" class=" text-sm absolute top-2 right-2 font-medium mr-2 px-2.5 py-0.5 rounded bg-red-500 text-red-300">remove</button>    
+             <button onclick="window.location.href = '/owner/certificate/delete/{{$certificate->id}}'" class=" text-base absolute top-2 right-2 font-medium mr-2 px-2.5 py-0.5 rounded bg-red-500 text-red-300">remove</button>
             <img class="h-auto max-w-full rounded-lg" src="{{asset($certificate->photo)}}" loading="lazy" alt="">
         </div>
         @empty

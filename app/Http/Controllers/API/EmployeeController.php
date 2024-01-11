@@ -33,7 +33,19 @@ class EmployeeController extends Controller
 
                 if($checkTime >= 0)
                 {
-                    $value->update(['status'=>3]);
+                    if($value->status == 1 )
+                    {
+                        $value->update(['status'=>3]);
+                        $data = [
+                            'name' => $value->firstname.' '.$value->lastname,
+                            'email' => $value->email,
+                            'date'=>$value->date,
+                            'time'=>$value->time,
+                            'number'=>$value->number,
+                            'message'=>'Your reservation is finished.'
+                        ];
+                        Mail::to($value->email)->send(new \App\Mail\Reservation($data));
+                    }
                 }
 
 
@@ -44,7 +56,7 @@ class EmployeeController extends Controller
             }
 
         }
-           $branch = Branch::where('owner_id',Auth::user()->owner_id)->first();
+        $branch = Branch::where('owner_id',Auth::user()->owner_id)->first();
         $appointments = Reservation::with('postInfo','branchInfo')->where('branch_id',$branch->id)->where('status',1)->orWhere('status',3)->latest()->paginate(10);
 
         return view('employee.reservation',compact('appointments'));
@@ -54,7 +66,7 @@ class EmployeeController extends Controller
         $id->update([
             'status' => 3
         ]);
-$branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
+        $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
         $data = [
             'name' => $id->firstname.' '.$id->lastname,
             'email' => $id->email,
@@ -62,16 +74,16 @@ $branch = Branch::with('ownerInfo')->where('id',$id->branch_id)->first();
             'time'=>$id->time,
             'message'=>'Your reservation is finished.'
         ];
-         Mail::to($id->email)->send(new \App\Mail\Reservation($data));
+        Mail::to($id->email)->send(new \App\Mail\Reservation($data));
         $owners = User::where('owner_id',$branch->owner_id)->latest()->get();
-         $owner = [
-                  'name' => $id->firstname.' '.$id->lastname,
+        $owner = [
+            'name' => $id->firstname.' '.$id->lastname,
             'email' => $id->email,
             'date'=>$id->date,
             'time'=>$id->time,
             'message'=>$id->firstname.' '.$id->lastname." reservation is finished."
-         ];
-            Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
+        ];
+        Mail::to($branch->ownerInfo->email)->send(new \App\Mail\Reservation($owner));
 
         if($owners)
         {

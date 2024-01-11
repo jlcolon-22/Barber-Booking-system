@@ -6,7 +6,7 @@
         class="bg-[url('/assets/bg3.jpeg')] bg-cover bg-center pb-[5rem] pt-[3rem] min-h-[100svh] origin-bottom items-center z-50 px-3 ">
 
         <div class="grid grid-cols-1 lg:w-2/5 px-10  mx-auto py-10 bg-black bg-opacity-90">
-            <h1 class="pb-10 font-bold">Chats</h1>
+            <h1 class="pb-10 font-bold text-2xl">Chats</h1>
 
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg space-y-2">
                 @forelse($branches as $branch)
@@ -44,7 +44,7 @@
                         Feedback
                     </h3>
                     <button onclick="closeModal()" type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center "
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-base w-8 h-8 ml-auto inline-flex justify-center items-center "
                             data-modal-hide="default-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                              viewBox="0 0 14 14">
@@ -58,7 +58,7 @@
                 <div class="p-6 space-y-6">
                     <form class="space-y-6" action="/feedback" method="POST">
                         @if (session()->has('error'))
-                            <div class="flex items-center p-4 mb-4 text-sm  rounded-lg  bg-gray-800 text-red-400"
+                            <div class="flex items-center p-4 mb-4 text-base  rounded-lg  bg-gray-800 text-red-400"
                                  role="alert">
                                 <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -77,15 +77,15 @@
                         <div class="relative z-0 w-full mb-6 group">
 
                             <textarea name="message" required
-                                      class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 ppearance-none text-gray-700 border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"></textarea>
+                                      class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 ppearance-none text-gray-700 border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"></textarea>
                             <label for="floating_first_name"
-                                   class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Message</label>
+                                   class="peer-focus:font-medium absolute text-base text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Message</label>
                         </div>
 
 
                         <div>
                             <button type="submit"
-                                    class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-base font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 Send
                                 Feedback
                             </button>
