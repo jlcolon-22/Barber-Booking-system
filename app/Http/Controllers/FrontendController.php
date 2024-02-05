@@ -398,6 +398,7 @@ class FrontendController extends Controller
 
     public function update_account(Request $request, User $id)
     {
+
         if (!!$request->password) {
             $request->validate([
                 'password' => 'min:8',

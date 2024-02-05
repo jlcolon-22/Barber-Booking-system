@@ -52,12 +52,15 @@
         <input
         type="email"
         name="email"
-        id="floating_email"
-        class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-        placeholder=" "
-        required
         disabled
         value="{{Auth::user()->email}}"
+        id="floating_email"
+        class="block py-2.5 px-0 w-full text-base bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer select-none"
+        placeholder=" "
+        required
+
+
+
         />
         <label
         for="floating_email"
