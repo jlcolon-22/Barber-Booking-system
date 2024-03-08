@@ -2,27 +2,94 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ChatMessage;
-use App\Models\Conversation;
-use App\Models\Message;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Http\Request;
-use App\Models\Branch;
-use App\Models\BranchTime;
-use App\Models\User;
-use App\Models\Post;
-use App\Models\Reservation;
-use App\Models\Feedback;
 use Carbon\Carbon;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Branch;
+use GuzzleHttp\Client;
+use App\Models\Message;
+use App\Models\Feedback;
+use App\Models\BranchTime;
+use App\Events\ChatMessage;
+use App\Models\Reservation;
+use Illuminate\Support\Str;
+use App\Models\Conversation;
+use App\Models\Otp;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 
 class FrontendController extends Controller
 {
+
+    public function chechIfVerify(Request $request)
+    {
+        $user = Otp::where('number',$request->number)->where('status',1)->exists();
+
+        return response()->json($user);
+    }
+    public function checkOtp(Request $request)
+    {
+        $otp = $request->first.$request->second.$request->third.$request->fourth;
+        $number = Otp::query()->where('number',$request->number)->where('otp',$otp)->exists();
+        if($number)
+        {
+            Otp::query()->where('number',$request->number)->where('otp',$otp)->update(['status' => true]);
+            return response()->json(true);
+        }else{
+            return response()->json(false);
+        }
+
+    }
+    public function send_otp(Request $request)
+    {
+        $randomNumber = rand(1000, 9999);
+        Otp::query()->create([
+            'otp'=>$randomNumber,
+            'number'=>$request->number
+        ]);
+        $response = Http::post('https://api.semaphore.co/api/v4/messages',[
+            'apikey' => '169d841753ebe36cd27e3ce7cdc6e51d',
+            'number'=>$request->number,
+            'message'=> 'our OTP code is now '.$randomNumber.'. Please use it quickly!',
+           ]);
+        return response()->json($randomNumber);
+    }
+    public function sms()
+    {
+        // 169d841753ebe36cd27e3ce7cdc6e51d
+       $response = Http::post('https://api.semaphore.co/api/v4/messages',[
+        'apikey' => '169d841753ebe36cd27e3ce7cdc6e51d',
+        // 'number'=>
+       ]);
+       dd($response);
+    // $client = new Client();
+    // $parameters = [
+    //     'apikey' => 'a1398f27fe149bb183094ecc07c84de6' // Your API KEY
+
+    // ];
+
+    // try {
+    //     $response = $client->get('https://api.semaphore.co/api/v4/account', [
+    //         'form_params' => [
+    //             'apikey' => 'a1398f27fe149bb183094ecc07c84de6'
+    //         ]
+    //     ]);
+
+    //     $output = $response->getBody()->getContents();
+    //     // Show the server response
+    //     echo $output;
+    // } catch (\Exception $e) {
+    //     // Handle exceptions
+    //     echo $e->getMessage();
+    // }
+
+    }
     public function getBranchTIme(Request $request,Branch $id)
     {
         $check = BranchTime::where('date',$request->date)->where('branch_id',$id->id)->first();

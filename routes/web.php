@@ -40,6 +40,11 @@ Route::get('/auth/forget', function () {
 Route::get('/auth/forget/message', function () {
     return view('auth.forgetmessage');
 });
+Route::get('/sms', [FrontendController::class,'sms']);
+Route::post('/verify/phone_number',[FrontendController::class,'send_otp']);
+Route::post('/verify/otp',[FrontendController::class,'checkOtp']);
+Route::post('/check/number',[FrontendController::class,'chechIfVerify']);
+
 Route::middleware('customer.only')->group(function () {
     Route::get('/reservation', [FrontendController::class, 'reservation']);
     Route::post('/reservation', [FrontendController::class, 'store_reservation']);
@@ -57,7 +62,6 @@ Route::middleware('customer.only')->group(function () {
     Route::post('/admins/message/', [FrontendController::class, 'admin_message_store'])->name('admin_message_store');
     Route::get('/admins/message', [FrontendController::class, 'admin_message_fetch'])->name('admin_message_fetch');
 });
-
 Route::post('/contact', [FrontendController::class, 'contact']);
 Route::post('/branch/time/{id}',[FrontendController::class,'getBranchTIme']);
 
