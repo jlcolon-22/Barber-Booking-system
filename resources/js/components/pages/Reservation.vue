@@ -162,6 +162,7 @@
 
 
     </form>
+
     <div v-show="verifyModal"
         class="fixed top-0 w-full h-screen flex justify-center pt-10 left-0 bg-black/90 text-gray-800">
         <div class="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl h-fit">
@@ -184,26 +185,26 @@
                             <div class="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                                 <div class="w-16 h-16 ">
                                     <input
-                                        class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                                        class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-500 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                                         type="text" maxlength="1" pattern="[0-9]" inputmode="numeric"
                                         autocomplete="one-time-code" v-model="otps.first" required>
                                 </div>
                                 <div class="w-16 h-16 ">
                                     <input
-                                        class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                                        class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-500 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                                         type="text" maxlength="1" pattern="[0-9]" inputmode="numeric"
                                         autocomplete="one-time-code" v-model="otps.second" required>
                                 </div>
                                 <div class="w-16 h-16 ">
 
                                     <input
-                                        class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                                        class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-500 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                                         type="text" maxlength="1" pattern="[0-9]" inputmode="numeric"
                                         autocomplete="one-time-code" v-model="otps.third" required>
                                 </div>
                                 <div class="w-16 h-16 ">
                                     <input
-                                        class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                                        class="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-500 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                                         type="text" maxlength="1" pattern="[0-9]" inputmode="numeric"
                                         autocomplete="one-time-code" v-model="otps.fourth" required>
                                 </div>
